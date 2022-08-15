@@ -645,7 +645,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.7777778, y: 1}
+    m_SensorSize: {x: 2.0487804, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -766,6 +766,7 @@ GameObject:
   - component: {fileID: 1805945979}
   - component: {fileID: 1805945980}
   - component: {fileID: 1805945981}
+  - component: {fileID: 1805945982}
   m_Layer: 0
   m_Name: Cowboy
   m_TagString: Untagged
@@ -1071,6 +1072,18 @@ MonoBehaviour:
   _ropeLayer:
     serializedVersion: 2
     m_Bits: 256
+--- !u!114 &1805945982
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1805945968}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da7079f29a52b634ba3dbdda909c68d4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &2062661791
 PrefabInstance:
   m_ObjectHideFlags: 0
