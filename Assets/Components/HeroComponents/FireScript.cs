@@ -12,43 +12,49 @@ public class FireScript : MonoBehaviour
     [SerializeField] public GameObject _bullet;
     private SpriteRenderer _sr;
 
+    [SerializeField] private float _cooldownBetweenAttacks;
+    private float _timer;
+
     private void Awake()
     {
         _sr = gameObject.GetComponent<SpriteRenderer>();
     }
 
-    private void FixedUpdate()
+    
+    private void Update()
     {
-        if (_isFire)
+        _timer += Time.deltaTime;
+        
+        if (_timer > _cooldownBetweenAttacks && _isFire)
         {
             Fire();
-        }
+            _timer = 0;
+            }
     }
 
     public void FireTrigger(InputAction.CallbackContext context)
     {
-        Debug.Log("Fire!!!");
         if (context.started)
         {
-            Debug.Log("Кнопку нажали");
             _isFire = true;
+            _timer = _cooldownBetweenAttacks;
         } else if (context.canceled)
         {
-            Debug.Log("Кнопку отпустили");
             _isFire = false;
         }
     }
 
     private void Fire()
     {
+        Debug.Log("Стреляю");
         if (_sr.flipX)
         {
             Instantiate(_bullet, _fireLeft.position, _fireLeft.rotation); //появление нашего префаба (что создаем, где создаем
-            _isFire = false;
+            
         } else
         {
             Instantiate(_bullet, _fireRight.position, _fireRight.rotation); //появление нашего префаба (что создаем, где создаем
-            _isFire = false;
+            
         }
         
     }
