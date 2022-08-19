@@ -1109,9 +1109,9 @@ MonoBehaviour:
     m_ActionName: Movement/Move[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1805945978}
-        m_TargetAssemblyTypeName: MovementController, Assembly-CSharp
-        m_MethodName: jump
+      - m_Target: {fileID: 1805945981}
+        m_TargetAssemblyTypeName: RopeMode, Assembly-CSharp
+        m_MethodName: ExitClimbMode
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1121,9 +1121,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1805945981}
-        m_TargetAssemblyTypeName: RopeMode, Assembly-CSharp
-        m_MethodName: ExitClimbMode
+      - m_Target: {fileID: 1805945978}
+        m_TargetAssemblyTypeName: MovementController, Assembly-CSharp
+        m_MethodName: jump
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

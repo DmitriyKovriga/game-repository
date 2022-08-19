@@ -60,12 +60,24 @@ public class RopeMode : MonoBehaviour
         _VerticalInput = context.ReadValue<Vector2>().y;
         if (_isOnRope && !_climbing && _VerticalInput > 0) //если мы на вереве и мы не карабкаемся и мы нажали вверх, то мы начинаем карабкаться, выключаем гравитацию и крепим игрока по х к х веревки
         {
-            _climbing = true;
-            _hero.setClimbing(true);_rb2d.gravityScale = 0;
-            _t1.position = new Vector2(positionOfRoupe.x, _t1.position.y);
-            Debug.Log("Позиция игрока: " + _rb2d.position.x + " Позиция веревки: " + positionOfRoupe.x);
-            _rb2d.constraints = RigidbodyConstraints2D.FreezePositionX; //фризим по х
-            }
+            RopeModOn();
+        }
+    }
+
+    private void RopeModOn()
+    {
+        _climbing = true;
+        _hero.setClimbing(true); _rb2d.gravityScale = 0;
+        _t1.position = new Vector2(positionOfRoupe.x, _t1.position.y);
+        Debug.Log("Позиция игрока: " + _rb2d.position.x + " Позиция веревки: " + positionOfRoupe.x);
+        _rb2d.constraints = RigidbodyConstraints2D.FreezePositionX; //фризим по х
+    }
+
+    private void RopeModOff ()
+    {
+        _climbing = false;
+        _rb2d.gravityScale = 4;
+        _rb2d.constraints = RigidbodyConstraints2D.FreezeRotation; //анфризим по х
     }
 
 
@@ -73,12 +85,10 @@ public class RopeMode : MonoBehaviour
     {
         if (_climbing)
         {
-            _climbing = false;
-            _rb2d.gravityScale = 4;
-            _rb2d.constraints = RigidbodyConstraints2D.FreezeRotation; //анфризим по х
+            RopeModOff();
+            _rb2d.velocity = new Vector2(_rb2d.velocity.x, _hero.getJumpHeight());
         }
     }
-
     
     public bool getClimbing() //гет-тер для получения параметра из-вне
     {
