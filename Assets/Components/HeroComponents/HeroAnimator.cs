@@ -7,12 +7,14 @@ public class HeroAnimator : MonoBehaviour
     
     private Rigidbody2D _r2D;
     private Hero _hero;
+    private RopeMode _rope;
 
     private void Awake()
     {
         _animator = gameObject.GetComponent<Animator>();
         _r2D = gameObject.GetComponent<Rigidbody2D>();
         _hero = gameObject.GetComponent<Hero>();
+        _rope = gameObject.GetComponent<RopeMode>();
     }
 
     public void ChangeHeroAnimationTo(string newState)
@@ -29,7 +31,7 @@ public class HeroAnimator : MonoBehaviour
 
     public void AutoCheckState()
     {
-        if (_hero.getGround())
+        if (_hero.getGround() && !_rope.getClimbing())
         {
             if (_r2D.velocity.x == 0)
             {
@@ -39,12 +41,22 @@ public class HeroAnimator : MonoBehaviour
                 ChangeHeroAnimationTo("Run");
             }
         } 
-        else if (_r2D.velocity.y > 1f)
+        else if (_r2D.velocity.y > 1f && !_rope.getClimbing())
         {
             ChangeHeroAnimationTo("Jump");
-        } else if (_r2D.velocity.y < -1f)
+        } else if (_r2D.velocity.y < -1f && !_rope.getClimbing())
         {
             ChangeHeroAnimationTo("Fall");
-        } 
+        } else if (_rope.getClimbing() && _r2D.velocity.y == 0)
+        {
+            ChangeHeroAnimationTo("IdleClimb");
+        } else if (_rope.getClimbing() && _r2D.velocity.y > 0)
+        {
+            ChangeHeroAnimationTo("Climbing");
+        }
+        else if (_rope.getClimbing() && _r2D.velocity.y < 0)
+        {
+            ChangeHeroAnimationTo("ClimbingDown");
+        }
     }
 }

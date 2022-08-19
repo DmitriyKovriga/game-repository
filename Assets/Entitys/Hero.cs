@@ -51,4 +51,14 @@ public class Hero : MonoBehaviour
         return _climbingSpeed;
     }
 
+    public bool getClimbing()
+    {
+        return _isClimbing;
+    }
+
+    public void setClimbing(bool newState)
+    {
+        _isClimbing = newState;
+    }
+
 }

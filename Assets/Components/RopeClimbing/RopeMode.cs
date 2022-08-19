@@ -6,43 +6,38 @@ using UnityEngine.InputSystem;
 
 public class RopeMode : MonoBehaviour
 {
-    [SerializeField] private Transform _ropeTrigger; //объект для поиска веревок
-    [SerializeField] private LayerMask _ropeLayer; //указываем слой веревки
+    [SerializeField] private Transform _ropeTrigger; //РѕР±СЉРµРєС‚ РґР»СЏ РїРѕРёСЃРєР° РІРµСЂРµРІРѕРє
+    [SerializeField] private LayerMask _ropeLayer; //СѓРєР°Р·С‹РІР°РµРј СЃР»РѕР№ РІРµСЂРµРІРєРё
 
-    private Rigidbody2D _rb2d; 
-    private Hero _hero; //класс с переменной скорости карабканья
+    private Rigidbody2D _rb2d;
+    private Transform _t1;
+    private Hero _hero; //РєР»Р°СЃСЃ СЃ РїРµСЂРµРјРµРЅРЅРѕР№ СЃРєРѕСЂРѕСЃС‚Рё РєР°СЂР°Р±РєР°РЅСЊСЏ
 
-    private Vector2 positionOfRoupe; //переменная для хранения позиции веревки из коллизии
+    private Vector2 positionOfRoupe; //РїРµСЂРµРјРµРЅРЅР°СЏ РґР»СЏ С…СЂР°РЅРµРЅРёСЏ РїРѕР·РёС†РёРё РІРµСЂРµРІРєРё РёР· РєРѕР»Р»РёР·РёРё
 
-    private bool _isOnRope; //переменная о наличии контакта с веревкой
-    private bool _climbing; //состояние карабканья
+    [SerializeField] private  bool _isOnRope; //РїРµСЂРµРјРµРЅРЅР°СЏ Рѕ РЅР°Р»РёС‡РёРё РєРѕРЅС‚Р°РєС‚Р° СЃ РІРµСЂРµРІРєРѕР№
+    [SerializeField] private bool _climbing; //СЃРѕСЃС‚РѕСЏРЅРёРµ РєР°СЂР°Р±РєР°РЅСЊСЏ
 
     private float _VerticalInput;
 
-    private void Awake() //инициализация
+    private void Awake() //РёРЅРёС†РёР°Р»РёР·Р°С†РёСЏ
     {
         _rb2d = gameObject.GetComponent<Rigidbody2D>();
         _hero = gameObject.GetComponent<Hero>();
+        _t1 = gameObject.GetComponent<Transform>();
     }
 
 
-    private void isOnRope() //метод отрисовки оверлапкруга, радиусом 0.2, который ищет граунд леер
+    private void isOnRope() //РјРµС‚РѕРґ РѕС‚СЂРёСЃРѕРІРєРё РѕРІРµСЂР»Р°РїРєСЂСѓРіР°, СЂР°РґРёСѓСЃРѕРј 0.2, РєРѕС‚РѕСЂС‹Р№ РёС‰РµС‚ РіСЂР°СѓРЅРґ Р»РµРµСЂ
     {
         _isOnRope = Physics2D.OverlapCircle(_ropeTrigger.position, 0.2f, _ropeLayer);
-    }
-
-    private void OnTriggerEnter2D(Collider2D collision) //ищем веревки и при нахождении записываем её позицию
-    {
-        if (collision.gameObject.layer == _ropeLayer)
-        {
-            positionOfRoupe = collision.GetComponent<Transform>().position;
         }
-    }
 
+    
     private void Update()
     {
-        isOnRope(); //ищем веревку
-        if (_climbing) climb(); //двигаемся пока вверх и вниз
+        isOnRope(); //РёС‰РµРј РІРµСЂРµРІРєСѓ
+        if (_climbing) climb(); //РґРІРёРіР°РµРјСЃСЏ РїРѕРєР° РІРІРµСЂС… Рё РІРЅРёР·
     }
 
     private void climb()
@@ -51,33 +46,39 @@ public class RopeMode : MonoBehaviour
 
     }
 
-    public void EnterClimbingMode (InputAction.CallbackContext context) //по нажатию кнопок передвижения,
+    public void EnterClimbingMode (InputAction.CallbackContext context) //РїРѕ РЅР°Р¶Р°С‚РёСЋ РєРЅРѕРїРѕРє РїРµСЂРµРґРІРёР¶РµРЅРёСЏ,
     {
         _VerticalInput = context.ReadValue<Vector2>().y;
-        if (_isOnRope && !_climbing && _VerticalInput > 0) //если мы на вереве и мы не карабкаемся и мы нажали вверх, то мы начинаем карабкаться, выключаем гравитацию и крепим игрока по х к х веревки
+        if (_isOnRope && !_climbing && _VerticalInput > 0) //РµСЃР»Рё РјС‹ РЅР° РІРµСЂРµРІРµ Рё РјС‹ РЅРµ РєР°СЂР°Р±РєР°РµРјСЃСЏ Рё РјС‹ РЅР°Р¶Р°Р»Рё РІРІРµСЂС…, С‚Рѕ РјС‹ РЅР°С‡РёРЅР°РµРј РєР°СЂР°Р±РєР°С‚СЊСЃСЏ, РІС‹РєР»СЋС‡Р°РµРј РіСЂР°РІРёС‚Р°С†РёСЋ Рё РєСЂРµРїРёРј РёРіСЂРѕРєР° РїРѕ С… Рє С… РІРµСЂРµРІРєРё
         {
             _climbing = true;
-            _rb2d.gravityScale = 0;
-            _rb2d.MovePosition(new Vector2(positionOfRoupe.x, _rb2d.position.y));
-            _rb2d.constraints = RigidbodyConstraints2D.FreezePositionX; //фризим по х
-            
-        }
+            _hero.setClimbing(true);_rb2d.gravityScale = 0;
+            _t1.position = new Vector2(positionOfRoupe.x, _t1.position.y);
+            Debug.Log("РџРѕР·РёС†РёСЏ РёРіСЂРѕРєР°: " + _rb2d.position.x + " РџРѕР·РёС†РёСЏ РІРµСЂРµРІРєРё: " + positionOfRoupe.x);
+            _rb2d.constraints = RigidbodyConstraints2D.FreezePositionX; //С„СЂРёР·РёРј РїРѕ С…
+            }
     }
 
 
-    public void ExitClimbMode (InputAction.CallbackContext context) //выход из карабканья по пробелу
+    public void ExitClimbMode (InputAction.CallbackContext context) //РІС‹С…РѕРґ РёР· РєР°СЂР°Р±РєР°РЅСЊСЏ РїРѕ РїСЂРѕР±РµР»Сѓ
     {
         if (_climbing)
         {
             _climbing = false;
             _rb2d.gravityScale = 4;
-            _rb2d.constraints = RigidbodyConstraints2D.FreezeRotation; //анфризим по х
+            _rb2d.constraints = RigidbodyConstraints2D.FreezeRotation; //Р°РЅС„СЂРёР·РёРј РїРѕ С…
         }
     }
 
     
-    public bool getClimbing() //гет-тер для получения параметра из-вне
+    public bool getClimbing() //РіРµС‚-С‚РµСЂ РґР»СЏ РїРѕР»СѓС‡РµРЅРёСЏ РїР°СЂР°РјРµС‚СЂР° РёР·-РІРЅРµ
     {
         return _climbing;
+    }
+
+    public void setPosOfRoupe (Vector3 number)
+    {
+        positionOfRoupe = number;
+        Debug.Log("РќР°Рј РёР·РІРµСЃС‚РЅР° РїРѕР·РёС†РёСЏ РІРµСЂРµРІРєРё, РѕРЅР° РЅР°С…РѕРґРёС‚СЃСЏ РїРѕ Р°РґСЂРµСЃСЃСѓ: " + number);
     }
 }
