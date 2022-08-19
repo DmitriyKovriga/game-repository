@@ -37,7 +37,6 @@ public class FireScript : MonoBehaviour
         if (context.started)
         {
             _isFire = true;
-            _timer = _cooldownBetweenAttacks;
         } else if (context.canceled)
         {
             _isFire = false;
