@@ -12,6 +12,7 @@ public class RopeMode : MonoBehaviour
     private Rigidbody2D _rb2d;
     private Transform _t1;
     private Hero _hero; //класс с переменной скорости карабканья
+    private GroundCheck _groundCheck;
 
     private Vector2 positionOfRoupe; //переменная для хранения позиции веревки из коллизии
 
@@ -25,24 +26,32 @@ public class RopeMode : MonoBehaviour
         _rb2d = gameObject.GetComponent<Rigidbody2D>();
         _hero = gameObject.GetComponent<Hero>();
         _t1 = gameObject.GetComponent<Transform>();
+        _groundCheck = gameObject.GetComponent<GroundCheck>();
     }
 
 
     private void isOnRope() //метод отрисовки оверлапкруга, радиусом 0.2, который ищет граунд леер
     {
         _isOnRope = Physics2D.OverlapCircle(_ropeTrigger.position, 0.2f, _ropeLayer);
-        }
+    }
 
     
     private void Update()
     {
+        
         isOnRope(); //ищем веревку
+        if (!_isOnRope)
+        {
+            _climbing = false;
+            _hero.setClimbing(false); _rb2d.gravityScale = 4;
+            _rb2d.constraints = RigidbodyConstraints2D.FreezeRotation;
+        }
         if (_climbing) climb(); //двигаемся пока вверх и вниз
     }
 
     private void climb()
     {
-        _rb2d.velocity = new Vector2(0, _hero.getClimbingSpeed() * _VerticalInput);
+       if (_climbing) _rb2d.velocity = new Vector2(0, _hero.getClimbingSpeed() * _VerticalInput);
 
     }
 
