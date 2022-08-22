@@ -10,6 +10,7 @@ public class Hero : MonoBehaviour
     [SerializeField] private float _moveSpeed;
     [SerializeField] private float _climbingSpeed;
     
+    
 
     public void setGround(bool isground) //аккуратно, не проверил нулл
     {

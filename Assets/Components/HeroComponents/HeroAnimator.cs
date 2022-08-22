@@ -8,6 +8,8 @@ public class HeroAnimator : MonoBehaviour
     private Rigidbody2D _r2D;
     private Hero _hero;
     private RopeMode _rope;
+    private FireScript _fireScript;
+    private bool _isFire;
 
     private void Awake()
     {
@@ -15,6 +17,7 @@ public class HeroAnimator : MonoBehaviour
         _r2D = gameObject.GetComponent<Rigidbody2D>();
         _hero = gameObject.GetComponent<Hero>();
         _rope = gameObject.GetComponent<RopeMode>();
+        _fireScript = gameObject.GetComponent<FireScript>();
     }
 
     public void ChangeHeroAnimationTo(string newState)
@@ -27,11 +30,14 @@ public class HeroAnimator : MonoBehaviour
     private void Update()
     {
         AutoCheckState();
+        _isFire = _fireScript.getFire();
     }
+
+    
 
     public void AutoCheckState()
     {
-        if (_hero.getGround() && !_rope.getClimbing())
+        if (_hero.getGround() && !_rope.getClimbing() && !_isFire)
         {
             if (_r2D.velocity.x == 0)
             {
@@ -41,20 +47,20 @@ public class HeroAnimator : MonoBehaviour
                 ChangeHeroAnimationTo("Run");
             }
         } 
-        else if (_r2D.velocity.y > 1f && !_rope.getClimbing())
+        else if (_r2D.velocity.y > 1f && !_rope.getClimbing() && !_isFire)
         {
             ChangeHeroAnimationTo("Jump");
-        } else if (_r2D.velocity.y < -1f && !_rope.getClimbing())
+        } else if (_r2D.velocity.y < -1f && !_rope.getClimbing() && !_isFire)
         {
             ChangeHeroAnimationTo("Fall");
-        } else if (_rope.getClimbing() && _r2D.velocity.y == 0)
+        } else if (_rope.getClimbing() && _r2D.velocity.y == 0 && !_isFire)
         {
             ChangeHeroAnimationTo("IdleClimb");
-        } else if (_rope.getClimbing() && _r2D.velocity.y > 0)
+        } else if (_rope.getClimbing() && _r2D.velocity.y > 0 && !_isFire)
         {
             ChangeHeroAnimationTo("Climbing");
         }
-        else if (_rope.getClimbing() && _r2D.velocity.y < 0)
+        else if (_rope.getClimbing() && _r2D.velocity.y < 0 && !_isFire)
         {
             ChangeHeroAnimationTo("ClimbingDown");
         }

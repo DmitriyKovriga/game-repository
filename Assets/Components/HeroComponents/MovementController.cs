@@ -30,9 +30,10 @@ public class MovementController : MonoBehaviour
 
     }
 
-    private void Update()
+
+    private void FixedUpdate()
     {
-        if (!_isClimbing) moveHero(); //вызываем функцию движения
+        if (!_isClimbing) moveHero(); //вызываем функцию движения 
     }
 
     public void flipHero ()
