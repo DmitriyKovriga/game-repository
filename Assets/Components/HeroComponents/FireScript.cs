@@ -14,6 +14,7 @@ public class FireScript : MonoBehaviour
     private HeroAnimator _hr;
     private Rigidbody2D _rb2d;
     private Hero _hero;
+    private RopeMode _ropeMode;
 
     [SerializeField] private float _cooldownBetweenAttacks;
     private float _timer;
@@ -24,6 +25,7 @@ public class FireScript : MonoBehaviour
         _hr = gameObject.GetComponent<HeroAnimator>();
         _rb2d = gameObject.GetComponent<Rigidbody2D>();
         _hero = gameObject.GetComponent<Hero>();
+        _ropeMode = gameObject.GetComponent<RopeMode>();
     }
 
     public bool getFire()
@@ -38,10 +40,10 @@ public class FireScript : MonoBehaviour
 
         if (_isFire)
         {
-            _rb2d.constraints = RigidbodyConstraints2D.FreezePositionX;
+            _rb2d.constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezeRotation;
         } else
         {
-            _rb2d.constraints = RigidbodyConstraints2D.FreezeRotation;
+            if (!_ropeMode.getClimbing()) _rb2d.constraints = RigidbodyConstraints2D.FreezeRotation;
         }
        
         if (_timer > _cooldownBetweenAttacks && _isFire)
