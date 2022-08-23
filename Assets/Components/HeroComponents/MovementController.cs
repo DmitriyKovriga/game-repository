@@ -9,7 +9,7 @@ public class MovementController : MonoBehaviour
     private Hero _hero;
     private Rigidbody2D _rigidbody2D;
     private float _moveSpeed;
-    private float _horizontalInput;
+    [SerializeField] private float _horizontalInput;
     private float _verticalInput;
 
     private HeroAnimator _heroAnimator;
