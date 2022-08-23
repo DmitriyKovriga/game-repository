@@ -33,10 +33,15 @@ public class FireScript : MonoBehaviour
         return _isFire;
     }
 
-    
+    private void Start()
+    {
+        _cooldownBetweenAttacks = _hero.getResultAttackSpeed();
+    }
+
     private void Update()
     {
         _timer += Time.deltaTime;
+        
 
         if (_isFire)
         {
