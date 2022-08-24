@@ -1,12 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
 public class FireScript : MonoBehaviour
 {
     [SerializeField] public Transform _fireRight;
     [SerializeField] public Transform _fireLeft;
+    [SerializeField] private UnityEvent _fireLeftEvenet;
+    [SerializeField] private UnityEvent _fireRightEvenet;
+    
 
     private bool _isFire = false;
     [SerializeField] public GameObject _bullet;
@@ -53,10 +57,10 @@ public class FireScript : MonoBehaviour
        
         if (_timer > _cooldownBetweenAttacks && _isFire)
         {
-            _hr.ChangeHeroAnimationTo("Fire");
+            _hr.FireAnimation();
             Fire();
             _timer = 0;
-            _hr.ChangeHeroAnimationTo("Idle");
+            
         }
     }
 
@@ -74,14 +78,16 @@ public class FireScript : MonoBehaviour
     private void Fire()
     {
         
-        Debug.Log("Стреляю");
+        
         if (_sr.flipX)
-        {
+            {
             Instantiate(_bullet, _fireLeft.position, _fireLeft.rotation).gameObject.GetComponent<DamageDealComponent>().setNewDamage(_hero.getResultHeroDamage()); //появление нашего префаба и передача ему нашего урона
-        } else
-        {
+            _fireLeftEvenet.Invoke();
+            } else
+            {
             Instantiate(_bullet, _fireRight.position, _fireRight.rotation).gameObject.GetComponent<DamageDealComponent>().setNewDamage(_hero.getResultHeroDamage()); //появление нашего префаба и передача ему нашего урона
-        }
+            _fireRightEvenet.Invoke();
+            }
         
         }
 }

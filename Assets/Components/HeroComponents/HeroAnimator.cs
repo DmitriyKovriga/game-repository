@@ -22,10 +22,17 @@ public class HeroAnimator : MonoBehaviour
 
     public void ChangeHeroAnimationTo(string newState)
     {
-        if (_currentState == newState) return; //сейвим ресурсы и не позволяем зациклить вызов стейта
+        //if (_currentState == newState) return; //сейвим ресурсы и не позволяем зациклить вызов стейта
         _animator.Play(newState);
         _currentState = newState;
     }
+
+    public void FireAnimation()
+    {
+        _animator.SetTrigger("Fire");
+    }
+
+    
 
     private void Update()
     {
