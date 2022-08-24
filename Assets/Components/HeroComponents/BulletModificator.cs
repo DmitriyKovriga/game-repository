@@ -12,30 +12,25 @@ public class BulletModificator : MonoBehaviour
     [SerializeField] LayerMask _enemyLayer;
     [SerializeField] LayerMask _groundLayer;
     [SerializeField] LayerMask _platformLayer;
+    [SerializeField] LayerMask _playerLayer;
+    [SerializeField] LayerMask _bulletLayer;
 
-    public UnityEvent _unityEvent;
-
-
-    private TriggerToHp _damageTrigger;
-    
 
     private void Awake()
     {
         _rb2d = gameObject.GetComponent<Rigidbody2D>();
-        _damageTrigger = gameObject.GetComponent<TriggerToHp>();
         
     }
 
     void Start()
     {
         _rb2d.velocity = transform.right * _speed;
-        _damageTrigger.setHpModifie(10); //задали урон пуле 10
     }
 
      private void OnTriggerEnter2D(Collider2D hitInfo)
     {
         
-        if (hitInfo.TryGetComponent(out Rigidbody2D r2d))
+        if (hitInfo.TryGetComponent(out Rigidbody2D r2d) && hitInfo.gameObject.layer != _playerLayer && hitInfo.gameObject.layer != _bulletLayer)
         {
             Debug.Log("Пуля разбилась об: " + hitInfo);
             Destroy(gameObject);

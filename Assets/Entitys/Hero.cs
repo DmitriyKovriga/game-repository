@@ -85,7 +85,7 @@ public class Hero : MonoBehaviour
     //---------методы расчета результатов статов
     public void CalculateFlatDamage ()
     {
-        _resultFlatDamage = _basicFlatDamage * _basicModificatorForFlatDamage;
+        _resultFlatDamage = _basicFlatDamage + _basicModificatorForFlatDamage;
     }
 
     public void CalculateDamageModificator ()

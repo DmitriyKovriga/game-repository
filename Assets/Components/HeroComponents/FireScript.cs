@@ -77,11 +77,10 @@ public class FireScript : MonoBehaviour
         Debug.Log("Стреляю");
         if (_sr.flipX)
         {
-            Instantiate(_bullet, _fireLeft.position, _fireLeft.rotation); //появление нашего префаба (что создаем, где создаем
-            
+            Instantiate(_bullet, _fireLeft.position, _fireLeft.rotation).gameObject.GetComponent<DamageDealComponent>().setNewDamage(_hero.getResultHeroDamage()); //появление нашего префаба и передача ему нашего урона
         } else
         {
-            Instantiate(_bullet, _fireRight.position, _fireRight.rotation); //появление нашего префаба (что создаем, где создаем
+            Instantiate(_bullet, _fireRight.position, _fireRight.rotation).gameObject.GetComponent<DamageDealComponent>().setNewDamage(_hero.getResultHeroDamage()); //появление нашего префаба и передача ему нашего урона
         }
         
         }

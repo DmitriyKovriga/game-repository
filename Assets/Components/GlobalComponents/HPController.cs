@@ -9,8 +9,6 @@ public class HPController : MonoBehaviour
     [SerializeField] private float _objectHp;
     
 
-    
-
     public float getHp ()
     {
         return _objectHp;
@@ -20,9 +18,11 @@ public class HPController : MonoBehaviour
     {
         if (number < 0)
         {
-            _objectHp -= number;
+            Debug.Log("setHp:HPController (итоговое изменение хп: " + number + " - это цифра которая пришла в функцию if number<0");
+            _objectHp += number;
         } else
         {
+            Debug.Log("setHp:HPController (итоговое изменение хп: " + number + " - это цифра которая пришла в функцию if number>0");
             _objectHp += number;
         }
     }
@@ -31,8 +31,9 @@ public class HPController : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("DealDamage"))
         {
-            _objectHp -= collision.gameObject.GetComponent<DamageDealComponent>().getDamage();
-            Debug.Log("Больно в ноге");
+            setHp(collision.gameObject.GetComponent<DamageDealComponent>().getDamage()); 
+            Debug.Log("Нанесли урон врагу, сработал OnCollisionEnter2D");
+            DeathCheck();
         }
     }
 
@@ -40,8 +41,18 @@ public class HPController : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("DealDamage"))
         {
-            _objectHp -= collision.gameObject.GetComponent<DamageDealComponent>().getDamage();
-            Debug.Log("Больно в ноге");
+            setHp(collision.gameObject.GetComponent<DamageDealComponent>().getDamage());
+            Debug.Log("Нанесли урон врагу, сработал OnTriggerEnter2D");
+            DeathCheck();
         }
     }
+
+    public void DeathCheck ()
+    {
+        if (_objectHp <= 0)
+        {
+            Debug.Log("Противник уничтожен");
+            Destroy(gameObject);
+        }
+        }
 }
