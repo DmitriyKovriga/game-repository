@@ -10,8 +10,8 @@ public class FireScript : MonoBehaviour
     [SerializeField] public Transform _fireLeft;
     [SerializeField] private UnityEvent _fireLeftEvenet;
     [SerializeField] private UnityEvent _fireRightEvenet;
-    
 
+    
     private bool _isFire = false;
     [SerializeField] public GameObject _bullet;
     private SpriteRenderer _sr;
@@ -49,7 +49,7 @@ public class FireScript : MonoBehaviour
 
         if (_isFire)
         {
-            _rb2d.constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezeRotation;
+           _rb2d.constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezeRotation;
         } else
         {
             if (!_ropeMode.getClimbing()) _rb2d.constraints = RigidbodyConstraints2D.FreezeRotation;
@@ -90,4 +90,5 @@ public class FireScript : MonoBehaviour
             }
         
         }
+
 }

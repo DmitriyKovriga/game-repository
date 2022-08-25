@@ -18,6 +18,7 @@ public class RopeMode : MonoBehaviour
 
     [SerializeField] private  bool _isOnRope; //переменная о наличии контакта с веревкой
     [SerializeField] private bool _climbing; //состояние карабканья
+    private FireScript _fireCheck;
 
     private float _VerticalInput;
 
@@ -27,6 +28,7 @@ public class RopeMode : MonoBehaviour
         _hero = gameObject.GetComponent<Hero>();
         _t1 = gameObject.GetComponent<Transform>();
         _groundCheck = gameObject.GetComponent<GroundCheck>();
+        _fireCheck = gameObject.GetComponent<FireScript>();
     }
 
 
@@ -58,7 +60,7 @@ public class RopeMode : MonoBehaviour
     public void EnterClimbingMode (InputAction.CallbackContext context) //по нажатию кнопок передвижения,
     {
         _VerticalInput = context.ReadValue<Vector2>().y;
-        if (_isOnRope && !_climbing && _VerticalInput > 0 || _isOnRope && !_climbing && _VerticalInput < 0) //если мы на вереве и мы не карабкаемся и мы нажали вверх, то мы начинаем карабкаться, выключаем гравитацию и крепим игрока по х к х веревки
+        if (_isOnRope && !_climbing && _VerticalInput > 0 && !_fireCheck.getFire() || _isOnRope && !_climbing && _VerticalInput < 0 && !_fireCheck.getFire()) //если мы на вереве и мы не карабкаемся и мы нажали вверх, то мы начинаем карабкаться, выключаем гравитацию и крепим игрока по х к х веревки
         {
             RopeModOn();
         }
@@ -94,6 +96,8 @@ public class RopeMode : MonoBehaviour
     {
         return _climbing;
     }
+
+    
 
     public void setPosOfRoupe (Vector3 number)
     {
