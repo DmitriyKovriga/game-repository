@@ -1318,11 +1318,11 @@ MonoBehaviour:
   CollisionTag: 
   EventReference:
     Guid:
-      Data1: -1997440895
-      Data2: 1314930121
-      Data3: 1852876987
-      Data4: -139080609
-    Path: event:/Music/Biom_1_stage
+      Data1: 1118508199
+      Data2: 1125662990
+      Data3: -727981924
+      Data4: -1703649252
+    Path: event:/Music/Biom_1_2
   Event: 
   PlayEvent: 1
   StopEvent: 0

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="AudioFile" id="{35f085e5-5900-491f-af7c-4ebd6ce05c06}">
+		<property name="assetPath">
+			<value>Dagon demo 1 rmk.wav</value>
+		</property>
+		<property name="isStreaming">
+			<value>true</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>44.0999985</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>144</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{77a0ec1d-0df1-4d36-822e-329c72c58d47}</destination>
+		</relationship>
+	</object>
+</objects>

@@ -1,5 +1,75 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+<<<<<<< Updated upstream
+=======
+--- !u!114 &-6778998593899621570
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.strings.bank
+  m_EditorClassIdentifier: 
+  Path: 2208/Build/Desktop/Master.strings.bank
+  Name: Master.strings
+  StudioPath: bank:/Master.strings
+  lastModified: 637976614529474913
+  FileSizes:
+  - Name: Desktop
+    Value: 974
+  Exists: 1
+--- !u!114 &-6000981843252830002
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.bank
+  m_EditorClassIdentifier: 
+  Path: 2208/Build/Desktop/Master.bank
+  Name: Master
+  StudioPath: bank:/Master
+  lastModified: 637976614529453479
+  FileSizes:
+  - Name: Desktop
+    Value: 4212096
+  Exists: 1
+--- !u!114 &-5523285864257454512
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Shots/Shots_2_plane
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Shots/Shots_2_plane
+  Guid:
+    Data1: 380553537
+    Data2: 1306834539
+    Data3: -1395773771
+    Data4: 325505581
+  Banks:
+  - {fileID: -6000981843252830002}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+>>>>>>> Stashed changes
 --- !u!114 &-4807721726602025639
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -27,6 +97,36 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 163636
+<<<<<<< Updated upstream
+=======
+--- !u!114 &-3569103131597923617
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Music/Biom_1_stage
+  m_EditorClassIdentifier: 
+  Path: event:/Music/Biom_1_stage
+  Guid:
+    Data1: -1997440895
+    Data2: 1314930121
+    Data3: 1852876987
+    Data4: -139080609
+  Banks:
+  - {fileID: -6000981843252830002}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 163636
+>>>>>>> Stashed changes
 --- !u!114 &-3399836251809715635
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -94,6 +194,7 @@ MonoBehaviour:
   m_Name: FMODStudioCache
   m_EditorClassIdentifier: 
   EditorBanks:
+<<<<<<< Updated upstream
   - {fileID: 5141153212024354761}
   - {fileID: 2915028339801332582}
   EditorEvents:
@@ -108,6 +209,22 @@ MonoBehaviour:
   StringsBanks:
   - {fileID: 5141153212024354761}
   cacheTime: 637967804828293828
+=======
+  - {fileID: -6778998593899621570}
+  - {fileID: -6000981843252830002}
+  EditorEvents:
+  - {fileID: -5523285864257454512}
+  - {fileID: -3569103131597923617}
+  - {fileID: 7768279990437898031}
+  - {fileID: 5902938996407988994}
+  - {fileID: 8698228803596798767}
+  EditorParameters: []
+  MasterBanks:
+  - {fileID: -6000981843252830002}
+  StringsBanks:
+  - {fileID: -6778998593899621570}
+  cacheTime: 637976614529474913
+>>>>>>> Stashed changes
   cacheVersion: 131591
 --- !u!114 &198714237944855418
 MonoBehaviour:
@@ -203,3 +320,87 @@ MonoBehaviour:
   - Name: Desktop
     Value: 978
   Exists: 1
+<<<<<<< Updated upstream
+=======
+--- !u!114 &5902938996407988994
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Music/tgfe
+  m_EditorClassIdentifier: 
+  Path: event:/Music/tgfe
+  Guid:
+    Data1: 71852635
+    Data2: 1250174186
+    Data3: 1649189562
+    Data4: 1811434106
+  Banks:
+  - {fileID: -6000981843252830002}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &7768279990437898031
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Shots/Shots_1_plane
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Shots/Shots_1_plane
+  Guid:
+    Data1: 232209894
+    Data2: 1140576149
+    Data3: -1611191917
+    Data4: 301291627
+  Banks:
+  - {fileID: -6000981843252830002}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &8698228803596798767
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Music/Biom_1_2
+  m_EditorClassIdentifier: 
+  Path: event:/Music/Biom_1_2
+  Guid:
+    Data1: 1118508199
+    Data2: 1125662990
+    Data3: -727981924
+    Data4: -1703649252
+  Banks:
+  - {fileID: -6000981843252830002}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 144000
+>>>>>>> Stashed changes
