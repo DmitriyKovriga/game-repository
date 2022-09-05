@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="EncodableAsset" id="{695ec848-255d-409e-970d-1fccb82a55e7}">
+		<property name="assetPath">
+			<value>Biom 1 Stage_0609/</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{77a0ec1d-0df1-4d36-822e-329c72c58d47}</destination>
+		</relationship>
+	</object>
+</objects>

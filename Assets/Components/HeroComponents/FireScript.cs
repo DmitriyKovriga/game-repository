@@ -45,16 +45,19 @@ public class FireScript : MonoBehaviour
 
     private void Fire()
     {
-        Debug.Log("Стреляю");
+        Debug.Log("пїЅпїЅпїЅпїЅпїЅпїЅпїЅ");
         if (_sr.flipX)
         {
-            Instantiate(_bullet, _fireLeft.position, _fireLeft.rotation); //появление нашего префаба (что создаем, где создаем
+            Instantiate(_bullet, _fireLeft.position, _fireLeft.rotation); //пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ (пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
             
         } else
         {
-            Instantiate(_bullet, _fireRight.position, _fireRight.rotation); //появление нашего префаба (что создаем, где создаем
+            Instantiate(_bullet, _fireRight.position, _fireRight.rotation); //пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ (пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
             
         }
+
+        // Play oneshot SFX
+        FMODUnity.RuntimeManager.PlayOneShot("event:/SFX/Shots/Shots_1_plane");
         
     }
 }

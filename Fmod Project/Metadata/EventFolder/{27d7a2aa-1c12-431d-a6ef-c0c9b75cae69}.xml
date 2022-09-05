@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="EventFolder" id="{27d7a2aa-1c12-431d-a6ef-c0c9b75cae69}">
+		<property name="name">
+			<value>Transitions Biom 1</value>
+		</property>
+		<relationship name="folder">
+			<destination>{4cda5e93-16a0-4c69-8d3e-113916d5759a}</destination>
+		</relationship>
+	</object>
+</objects>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="AudioFile" id="{a8247a68-54f3-41ee-9422-6d272785e757}">
+		<property name="assetPath">
+			<value>Biom 1 Stage_0609/Biom 1 Intro.wav</value>
+		</property>
+		<property name="isStreaming">
+			<value>true</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>44.0999985</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>13.411768707482993</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{77a0ec1d-0df1-4d36-822e-329c72c58d47}</destination>
+		</relationship>
+	</object>
+</objects>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="AudioFile" id="{f67a81c1-03dc-4269-9942-6376b2384981}">
+		<property name="assetPath">
+			<value>Biom 1 Stage_0609/Biom 1 Transition 3-1.wav</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>44.0999985</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>4.2352834467120184</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{77a0ec1d-0df1-4d36-822e-329c72c58d47}</destination>
+		</relationship>
+	</object>
+</objects>
