@@ -6,19 +6,21 @@ using UnityEngine.InputSystem;
 
 public class FireScript : MonoBehaviour
 {
-    [SerializeField] public Transform _fireRight;
-    [SerializeField] public Transform _fireLeft;
+    
+    //------------------------------------------------положение стрельбы и евент её анимации------------------------------------------
+    [SerializeField] private Transform _fireRight;
+    [SerializeField] private Transform _fireLeft;
     [SerializeField] private UnityEvent _fireLeftEvenet;
     [SerializeField] private UnityEvent _fireRightEvenet;
 
     
-    private bool _isFire = false;
-    [SerializeField] public GameObject _bullet;
-    private SpriteRenderer _sr;
-    private HeroAnimator _hr;
-    private Rigidbody2D _rb2d;
-    private Hero _hero;
-    private RopeMode _ropeMode;
+    private bool _isFire = false; //состояние стрельбы
+    [SerializeField] private GameObject _bullet; //объект пули
+    private SpriteRenderer _sr; //нужен для анимации вспышки
+    private HeroAnimator _hr; //нужен для анимации отсвета на персонаже
+    private Rigidbody2D _rb2d; //физика
+    private Hero _hero; //берем статы из героя
+    private RopeMode _ropeMode; //для запрета стрельбы на веревке
 
     [SerializeField] private float _cooldownBetweenAttacks;
     private float _timer;
@@ -82,12 +84,12 @@ public class FireScript : MonoBehaviour
         if (_sr.flipX)
             {
             Instantiate(_bullet, _fireLeft.position, _fireLeft.rotation).gameObject.GetComponent<DamageDealComponent>().setNewDamage(_hero.getResultHeroDamage()); //появление нашего префаба и передача ему нашего урона
-            _fireLeftEvenet.Invoke();
+            _fireLeftEvenet.Invoke(); //анимация выстрела
             } else
             {
             Instantiate(_bullet, _fireRight.position, _fireRight.rotation).gameObject.GetComponent<DamageDealComponent>().setNewDamage(_hero.getResultHeroDamage()); //появление нашего префаба и передача ему нашего урона
-            _fireRightEvenet.Invoke();
-            }
+            _fireRightEvenet.Invoke(); //анимация выстрела
+        }
         
         }
 
