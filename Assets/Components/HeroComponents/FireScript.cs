@@ -92,7 +92,7 @@ public class FireScript : MonoBehaviour
         }
         
         // Play oneshot SFX
-        FMODUnity.RuntimeManager.PlayOneShot("event:/SFX/Shots/Shots_1_plane");
+        FMODUnity.RuntimeManager.PlayOneShot("event:/SFX/Shots DRY/Shots_1_DRY");
 
     }
 

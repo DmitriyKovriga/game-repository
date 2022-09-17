@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class AudioEngine : MonoBehaviour
 {
-    // Vars for separate buses to control volume
+    // Volume Bussses
     FMOD.Studio.Bus Master;
     FMOD.Studio.Bus Music;
     FMOD.Studio.Bus SFX;
@@ -16,12 +16,12 @@ public class AudioEngine : MonoBehaviour
     // 70-100 Intensity 3
     FMOD.Studio.EventInstance gameMusic;
 
-    // Set variables to store volume
-    [Range(0.0f, 1.0f)][SerializeField] private float MasterVolume = 0.8f;
-    [Range(0.0f, 1.0f)][SerializeField] private float MusicVolume = 0.8f;
-    [Range(0.0f, 1.0f)][SerializeField] private float SFXVolume = 0.8f;
+    // to store banks volume
+    [Range(0.0f, 1.0f)][SerializeField] private float masterVolume = 0.8f;
+    [Range(0.0f, 1.0f)][SerializeField] private float musicVolume = 0.8f;
+    [Range(0.0f, 1.0f)][SerializeField] private float sfxVolume = 0.8f;
 
-    // Set var to store intensity ??? TEMP
+    // Set var to store intensity
     [Range(0f, 100f)] public float newIntensity = 50;
 
     void Awake()
@@ -30,7 +30,7 @@ public class AudioEngine : MonoBehaviour
         Master = FMODUnity.RuntimeManager.GetBus("bus:/");
         Music = FMODUnity.RuntimeManager.GetBus("bus:/Music");
         SFX = FMODUnity.RuntimeManager.GetBus("bus:/SFX");
-
+        
         // Get event by path, path can be found in Unity ->
         // FMOD/Event Browser/Events/Music/<name>/Full Path
         gameMusic = FMODUnity.RuntimeManager.CreateInstance("event:/Music/Biom_1_stage");
@@ -43,9 +43,9 @@ public class AudioEngine : MonoBehaviour
 
     void Update()
     {
-        Master.setVolume (MasterVolume);
-        Music.setVolume (MusicVolume);
-        SFX.setVolume (SFXVolume);
+        Master.setVolume (masterVolume);
+        Music.setVolume (musicVolume);
+        SFX.setVolume (sfxVolume);
 
         FMODUnity.RuntimeManager.StudioSystem.setParameterByName("intensity", newIntensity);
     }
