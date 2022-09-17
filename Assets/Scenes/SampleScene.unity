@@ -1329,7 +1329,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 2.0313075, y: 1}
+    m_SensorSize: {x: 1.7777778, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -1412,8 +1412,8 @@ PolygonCollider2D:
   m_Points:
     m_Paths:
     - - {x: 31, y: 30}
-      - {x: -30, y: 30}
-      - {x: -30, y: -5}
+      - {x: -49, y: 30.25}
+      - {x: -49, y: -5}
       - {x: 31, y: -5}
 --- !u!4 &1524800601
 Transform:
