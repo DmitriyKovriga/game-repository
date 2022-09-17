@@ -19,7 +19,7 @@ public class AudioEngine : MonoBehaviour
     // to store banks volume
     [Range(0.0f, 1.0f)][SerializeField] private float masterVolume = 0.8f;
     [Range(0.0f, 1.0f)][SerializeField] private float musicVolume = 0.8f;
-    [Range(0.0f, 1.0f)][SerializeField] private float sfxVolume = 0.8f;
+    [Range(0.0f, 1.0f)][SerializeField] private float sfxVolume = 0.6f;
 
     // Set var to store intensity
     [Range(0f, 100f)] public float newIntensity = 50;
