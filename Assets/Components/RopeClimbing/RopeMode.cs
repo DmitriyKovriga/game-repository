@@ -72,7 +72,7 @@ public class RopeMode : MonoBehaviour
         _hero.setClimbing(true); _rb2d.gravityScale = 0;
         _t1.position = new Vector2(positionOfRoupe.x, _t1.position.y);
         Debug.Log("Позиция игрока: " + _rb2d.position.x + " Позиция веревки: " + positionOfRoupe.x);
-        _rb2d.constraints = RigidbodyConstraints2D.FreezePositionX; //фризим по х
+        _rb2d.constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezeRotation; //фризим по х
     }
 
     private void RopeModOff ()
