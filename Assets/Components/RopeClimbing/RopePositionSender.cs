@@ -14,7 +14,7 @@ public class RopePositionSender : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log(collision.name + " " + collision.gameObject.layer);
+        //Debug.Log(collision.name + " " + collision.gameObject.layer);
         
         if (collision.gameObject.layer == 6)
         {
