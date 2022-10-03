@@ -10,14 +10,17 @@ namespace Mobs
         private MonsterBasic _monsterStats;
         private float _movespeed;
         private Transform _transform;
+        private Animator _animator;
+        private string _currentState;
         float _timer = 0;
         
-        public IdleState (Rigidbody2D rb2d, MonsterBasic mb, float movespeed, Transform transform)
+        public IdleState (Rigidbody2D rb2d, MonsterBasic mb, float movespeed, Transform transform, Animator animator)
         {
             _rb2d = rb2d;
             _monsterStats = mb;
             _movespeed = movespeed;
             _transform = transform;
+            _animator = animator;
         }
         
         public override void Enter()
@@ -37,8 +40,12 @@ namespace Mobs
             if (_timer < 3)
             {
                 Patrule();
+                ChangeHeroAnimationTo("Walk");
+                Debug.Log("Walk");
             } else if (_timer >=3 && _timer < 6)
             {
+                ChangeHeroAnimationTo("Idle");
+                Debug.Log("Idle");
                 wait();
             } else
             {
@@ -59,6 +66,14 @@ namespace Mobs
         {
             _rb2d.velocity = new Vector2(0, 0);
         }
-}
+
+
+        public void ChangeHeroAnimationTo(string newState)
+        {
+            if (_currentState == newState) return; //сейвим ресурсы и не позволяем зациклить вызов стейта
+            _animator.Play(newState);
+            _currentState = newState;
+        }
+    }
 }
 

@@ -11,14 +11,16 @@ namespace Mobs
         private Transform _transform;
         float _timer = 0;
         private GameObject _target;
+        private Animator _animator;
 
-        public WarningState(Rigidbody2D rb2d, MonsterBasic mb, float movespeed, Transform transform, GameObject target)
+        public WarningState(Rigidbody2D rb2d, MonsterBasic mb, float movespeed, Transform transform, GameObject target, Animator animator)
         {
             _rb2d = rb2d;
             _monsterStats = mb;
             _movespeed = movespeed;
             _transform = transform;
             _target = target;
+            _animator = animator;
         }
 
         public override void Enter()
