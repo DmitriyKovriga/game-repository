@@ -51,7 +51,7 @@ public class FireScript : MonoBehaviour
 
         if (_isFire)
         {
-           _rb2d.constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezeRotation;
+           _rb2d.constraints = RigidbodyConstraints2D.FreezeRotation;
         } else
         {
             if (!_ropeMode.getClimbing()) _rb2d.constraints = RigidbodyConstraints2D.FreezeRotation;
@@ -61,7 +61,7 @@ public class FireScript : MonoBehaviour
         {
             _hr.FireAnimation();
             Fire();
-            _timer = 0;
+            
             
         }
     }
@@ -83,14 +83,15 @@ public class FireScript : MonoBehaviour
         
         if (_sr.flipX)
             {
-            Instantiate(_bullet, _fireLeft.position, _fireLeft.rotation).gameObject.GetComponent<DamageDealComponent>().setNewDamage(_hero.getResultHeroDamage()); //��������� ������ ������� � �������� ��� ������ �����
-            _fireLeftEvenet.Invoke(); //�������� ��������
+            Instantiate(_bullet, _fireLeft.position, _fireLeft.rotation).gameObject.GetComponent<DamageDealComponent>().setNewDamage(_hero.getResultHeroDamage()); 
+            _fireLeftEvenet.Invoke(); 
             } else
             {
-            Instantiate(_bullet, _fireRight.position, _fireRight.rotation).gameObject.GetComponent<DamageDealComponent>().setNewDamage(_hero.getResultHeroDamage()); //��������� ������ ������� � �������� ��� ������ �����
-            _fireRightEvenet.Invoke(); //�������� ��������
+            Instantiate(_bullet, _fireRight.position, _fireRight.rotation).gameObject.GetComponent<DamageDealComponent>().setNewDamage(_hero.getResultHeroDamage()); 
+            _fireRightEvenet.Invoke(); 
         }
-        
+        _timer = 0;
+
         // Play oneshot SFX
         FMODUnity.RuntimeManager.PlayOneShot("event:/SFX/Shots DRY/Shots_1_DRY");
 
