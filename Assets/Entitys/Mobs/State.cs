@@ -19,6 +19,11 @@ namespace Mobs
         {
 
         }
+
+        public virtual void FixedUpdate()
+        {
+
+        }
     }
 }
 

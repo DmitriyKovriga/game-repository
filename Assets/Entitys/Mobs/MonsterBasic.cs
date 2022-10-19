@@ -8,7 +8,7 @@ namespace Mobs
     {
         [SerializeField] private float _moveSpeed;
         private StateMachine _stateMachine;
-        [SerializeField] private AggroRangeSender _aggro;
+        [SerializeField] private GameObject _aggro;
         private Animator _animator;
         private void Start()
         {  
@@ -22,6 +22,11 @@ namespace Mobs
             _stateMachine._currentState.Update();
         }
 
+        private void FixedUpdate()
+        {
+            _stateMachine._currentState.FixedUpdate();
+        }
+
         public float getMoveSpeed()
         {
             return _moveSpeed;
@@ -29,9 +34,8 @@ namespace Mobs
 
         public void setWarningState()
         {
-            GameObject target = _aggro.getLastPlayerDetection();
-            _stateMachine.ChangeState(new WarningState(gameObject.GetComponent<Rigidbody2D>(), this, _moveSpeed, gameObject.GetComponent<Transform>(), target, _animator));
-            gameObject.GetComponent<SpriteRenderer>().color = new Color(255, 55, 55);
+            GameObject target = _aggro.GetComponent<AggroRangeSender>().getLastPlayerDetection();
+            _stateMachine.ChangeState(new WarningState(gameObject.GetComponent<Rigidbody2D>(), _moveSpeed, gameObject.GetComponent<Transform>(), target, _animator, _aggro));
         }
 
         public void setIdleState()

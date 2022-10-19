@@ -33,25 +33,28 @@ namespace Mobs
             
             base.Exit();
         }
-        public override void Update()
+
+        public override void FixedUpdate()
         {
-            
             _timer += Time.deltaTime;
             if (_timer < 3)
             {
                 Patrule();
-                ChangeHeroAnimationTo("Walk");
-                Debug.Log("Walk");
-            } else if (_timer >=3 && _timer < 6)
+            }
+            else if (_timer >= 3 && _timer < 6)
             {
-                ChangeHeroAnimationTo("Idle");
-                Debug.Log("Idle");
                 wait();
-            } else
+            }
+            else
             {
                 flip();
                 _timer = 0;
             }
+        }
+        public override void Update()
+        {
+            
+            
         }
         private void Patrule ()
         {

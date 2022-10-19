@@ -14,6 +14,14 @@ namespace Mobs
 
         
 
+        private void OnTriggerStay2D(Collider2D collision)
+        {
+            if (collision.gameObject.CompareTag("Player"))
+            {
+                _lastPlayerDetection = collision.gameObject;
+            }
+        }
+
         private void OnTriggerEnter2D(Collider2D collision)
         {
             if (collision.gameObject.CompareTag("Player"))
@@ -27,7 +35,6 @@ namespace Mobs
         {
             if (collision.gameObject.CompareTag("Player"))
             {
-                Debug.Log("переходим в idle из OnTriggerExit2D");
                 _idleSender.Invoke();
                 _lastPlayerDetection = null;
             }
