@@ -5,30 +5,31 @@ namespace Mobs
 {
     public class WarningState : State
     {
-        private Rigidbody2D _rb2d;
-        
-        private float _movespeed;
-        private Transform _transform;
-        private GameObject _agrro;
-        private AggroRangeSender _agrroRS;
-        float _timer = 0;
-        private GameObject _target;
-        private Animator _animator;
+        //-----------------logic var------------------
+        private Transform _targetTransform;
+        private Transform _monsterTransform;
+        private float _timerForCompare;
+        private float _delayForCompare = 5;
 
-        public WarningState(Rigidbody2D rb2d, float movespeed, Transform transform, GameObject target, Animator animator, GameObject agrro)
+        private float _timerForCompareAttack; 
+        private float _delayForCompareAttack = 2; //mb link it to monster attack speed ?
+
+        private bool _isNeedTofacingRight;
+        private Rigidbody2D _rb2d; //for move to target
+
+        //-----------------State logic var--------------
+        private StateMachine _stateMachine;
+
+        public WarningState (StateMachine stateMachine)
         {
-            _rb2d = rb2d;
-            _agrro = agrro;
-            _movespeed = movespeed;
-            _transform = transform;
-            _target = target;
-            _animator = animator;
-            _agrroRS = _agrro.GetComponent<AggroRangeSender>();
+            _stateMachine = stateMachine;
         }
 
         public override void Enter()
         {
-            Debug.Log("¬ошли в Warning");
+            _targetTransform = GameObject.FindGameObjectWithTag("Player").transform;
+            _monsterTransform = gameObject.GetComponent<Transform>();
+            _rb2d = gameObject.GetComponent<Rigidbody2D>();
         }
 
         public override void Exit()
@@ -38,34 +39,107 @@ namespace Mobs
 
         public override void Update()
         {
-            UpdateTarget();
+            Flipper(); //flipp to player
+            CompareWithTimer(); //check for switch to idle
+            CompareWithTimerForAttack(); //check for attack
         }
 
         public override void FixedUpdate()
         {
-            MoveToTarget();
+            
         }
 
-        private void UpdateTarget()
+        private bool CompareXZWithTarget () //checkout from looking range
         {
-            _target = _agrroRS.getLastPlayerDetection();
+            if (_targetTransform.position.x - _monsterTransform.position.x > -100 && _targetTransform.position.x - _monsterTransform.position.x < 100)
+            {
+                return true;
+            }
+            if (_targetTransform.position.y - _monsterTransform.position.y > -100 && _targetTransform.position.y - _monsterTransform.position.y < 100)
+            {
+                return true;
+            }
+            return false;
         }
 
-        private void MoveToTarget ()
+        private int CompareXZWithTargetForAttack() // return 1 for right attack, -1 for left attack and 0 for non-attack (or for special attack under him self) 
         {
-            if (_target.transform.position.x > _transform.position.x)
+            var result = _targetTransform.position.x - _monsterTransform.position.x;
+            
+            if (result > -100 && result < 100) //check for out facing
             {
-                _rb2d.velocity = new Vector2(_movespeed, _rb2d.velocity.y);
-                Debug.Log("Ѕегу за игроком вправо, противник в координатах: " + _target.transform.position.x + " наш велосити " + _rb2d.velocity.x);
-            } else if (_target.transform.position.x < _transform.position.x)
+                if (result > 0)
+                {
+                    _isNeedTofacingRight = false;
+                } else
+                {
+                    _isNeedTofacingRight = true;
+                }
+            }
+
+            if (result > -10 && result < 10) //check for attack
             {
-                _rb2d.velocity = new Vector2(_movespeed * -1, _rb2d.velocity.y);
-                Debug.Log("Ѕегу за игроком влево, противник в координатах: " + _target.transform.position.x + " наш велосити " + _rb2d.velocity.x);
-            } else
+                if (result > 0)
+                {
+                    return 1;
+                }
+                else
+                {
+                    return -1;
+                }
+            }
+            return 0;
+        }
+
+        private void Flipper() //flip monster in a righgt way
+        {
+            if (_isNeedTofacingRight && _monsterTransform.localScale.x > 0)
             {
-                Debug.Log("—тою в противнике ?");
+                _monsterTransform.localScale = new Vector2(_monsterTransform.localScale.x * -1, _monsterTransform.localScale.y);
+            } else if (!_isNeedTofacingRight && _monsterTransform.localScale.x < 0)
+            {
+                _monsterTransform.localScale = new Vector2(_monsterTransform.localScale.x * -1, _monsterTransform.localScale.y);
             }
         }
+
+        private void CompareWithTimer () //do we see player and do we need to switch on idle state? 
+        {
+            _timerForCompare += Time.deltaTime;
+
+            if (_timerForCompare >= _delayForCompare) 
+            {
+                if (!CompareXZWithTarget()) //need to switch to idle ?
+                {
+                    _stateMachine.ChangeState(new IdleState(_stateMachine));
+                }
+                _timerForCompare = 0;
+            }
+        }
+
+        private void CompareWithTimerForAttack() //do we need to attack ?
+        {
+            _timerForCompareAttack += Time.deltaTime;
+
+            if (_timerForCompareAttack >= _delayForCompareAttack)
+            {
+                //attack
+            }
+            _delayForCompareAttack = 0;
+        }
+
+        
+        private void MoveToTarget()
+        {
+            var result = _targetTransform.position.x - _monsterTransform.position.x;
+            if (result > 0)
+            {
+                //go to the right
+            } else if (result < 0)
+            {
+                //go to the left
+            }
+        }
+
     }
     
 }
