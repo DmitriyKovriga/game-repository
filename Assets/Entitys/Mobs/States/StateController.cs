@@ -4,20 +4,20 @@ using UnityEngine;
 
 namespace Mobs
 {
-    public class StateMachine
+    public class StateController
     {
-        public State _currentState { get; set; }
+        public States _currentState { get; set; }
 
-        public void Initialize(State startState)
+        public void Initialize(States FirstState)
         {
-            _currentState = startState;
+            _currentState = FirstState;
             _currentState.Enter();
         }
 
-        public void ChangeState(State newState)
+        public void NextState(States state)
         {
             _currentState.Exit();
-            _currentState = newState;
+            _currentState = state;
             _currentState.Enter();
         }
     }
