@@ -10,13 +10,14 @@ namespace Mobs
         private Transform _targetTransform;
         private Transform _monsterTransform;
         private float _timerForCompare;
-        private float _delayForCompare = 5;
+        private float _delayForCompare = 1;
 
         private Rigidbody2D _rb2d; //for patrule realization
 
         //-----------------State logic var--------------
         private StateMachine _stateMachine;
-        private GameObject _monsterGameOnject;
+        private GameObject _monsterGameObject;
+        private SpriteRenderer _monsterSprite;
 
         //-----------------Logic for patrule------------
         private float _patruleTimer;
@@ -25,14 +26,15 @@ namespace Mobs
         public IdleState(StateMachine stateMachine, GameObject monster)
         {
             _stateMachine = stateMachine;
-            _monsterGameOnject = monster;
+            _monsterGameObject = monster;
         }
         public override void Enter()
         {
             Debug.Log("Join to Idle State");
             _targetTransform = GameObject.FindGameObjectWithTag("Player").transform;
-            _monsterTransform = _monsterGameOnject.GetComponent<Transform>();
-            _rb2d = _monsterGameOnject.GetComponent<Rigidbody2D>();
+            _monsterTransform = _monsterGameObject.GetComponent<Transform>();
+            _rb2d = _monsterGameObject.GetComponent<Rigidbody2D>();
+            _monsterSprite = _monsterGameObject.GetComponent<SpriteRenderer>();
         }
 
         public override void Exit()
@@ -54,14 +56,19 @@ namespace Mobs
 
             if (_patruleTimer <= 3f)
             {
+                if (_monsterSprite.flipX == true)
+                {
+                    _rb2d.velocity = new Vector2(_moveSpeed * -1, _rb2d.velocity.y);
+                }
+                else 
                 _rb2d.velocity = new Vector2(_moveSpeed, _rb2d.velocity.y);
-            } else if (_patruleTimer > 3f && _patruleTimer <= 6f)
+            }
+            else if (_patruleTimer > 3f && _patruleTimer <= 6f)
             {
-                return;
+                _rb2d.velocity = new Vector2(0, _rb2d.velocity.y);
             } else
             {
-                _moveSpeed = _moveSpeed * -1;
-                _monsterTransform.localScale = new Vector2(_monsterTransform.localScale.x * -1, _monsterTransform.localScale.y);
+                _monsterSprite.flipX = !_monsterSprite.flipX;
                 _patruleTimer = 0;
             }
         }
@@ -83,11 +90,17 @@ namespace Mobs
             {
                 if (CompareXZWithTarget()) //need to switch to warning ?
                 {
-                    _stateMachine.ChangeState(new WarningState(_stateMachine, _monsterGameOnject));
+                    _stateMachine.ChangeState(new WarningState(_stateMachine, _monsterGameObject));
                 }
                 _timerForCompare = 0;
             }
         }
+
+        private void EdgeCheck()
+        {
+            
+        }
+
     }
 }
 
