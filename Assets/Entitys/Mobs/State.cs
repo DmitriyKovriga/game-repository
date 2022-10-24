@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Mobs 
 {
-    public abstract class State : MonsterBasic
+    public abstract class State
     {
         public virtual void Enter()
         {

@@ -11,7 +11,7 @@ namespace Mobs
         private void Start()
         {  
             _stateMachine = new StateMachine();
-            _stateMachine.Initialize(new IdleState(_stateMachine));
+            _stateMachine.Initialize(new IdleState(_stateMachine, gameObject));
         }
 
         private void Update()

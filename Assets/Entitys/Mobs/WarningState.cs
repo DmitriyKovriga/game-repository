@@ -9,27 +9,32 @@ namespace Mobs
         private Transform _targetTransform;
         private Transform _monsterTransform;
         private float _timerForCompare;
-        private float _delayForCompare = 5;
+        private float _delayForCompare = 2;
 
         private float _timerForCompareAttack; 
-        private float _delayForCompareAttack = 2; //mb link it to monster attack speed ?
+        private float _delayForCompareAttack = 1; //mb link it to monster attack speed ?
 
-        private bool _isNeedTofacingRight;
         private Rigidbody2D _rb2d; //for move to target
 
         //-----------------State logic var--------------
         private StateMachine _stateMachine;
+        private GameObject _monsterGameOnject;
 
-        public WarningState (StateMachine stateMachine)
+        //-----------------Logic for chasing------------
+        private float _moveSpeed = 5;
+
+        public WarningState (StateMachine stateMachine, GameObject monster)
         {
             _stateMachine = stateMachine;
+            _monsterGameOnject = monster;
         }
 
         public override void Enter()
         {
+            Debug.Log("Enter Warning");
             _targetTransform = GameObject.FindGameObjectWithTag("Player").transform;
-            _monsterTransform = gameObject.GetComponent<Transform>();
-            _rb2d = gameObject.GetComponent<Rigidbody2D>();
+            _monsterTransform = _monsterGameOnject.GetComponent<Transform>();
+            _rb2d = _monsterGameOnject.GetComponent<Rigidbody2D>();
         }
 
         public override void Exit()
@@ -39,23 +44,18 @@ namespace Mobs
 
         public override void Update()
         {
-            Flipper(); //flipp to player
             CompareWithTimer(); //check for switch to idle
             CompareWithTimerForAttack(); //check for attack
         }
 
         public override void FixedUpdate()
         {
-            
+            MoveToTarget();
         }
 
         private bool CompareXZWithTarget () //checkout from looking range
         {
-            if (_targetTransform.position.x - _monsterTransform.position.x > -100 && _targetTransform.position.x - _monsterTransform.position.x < 100)
-            {
-                return true;
-            }
-            if (_targetTransform.position.y - _monsterTransform.position.y > -100 && _targetTransform.position.y - _monsterTransform.position.y < 100)
+            if (_targetTransform.position.x - _monsterTransform.position.x < -10 || _targetTransform.position.x - _monsterTransform.position.x > 10 || _targetTransform.position.y - _monsterTransform.position.y < -10 || _targetTransform.position.y - _monsterTransform.position.y > 10)
             {
                 return true;
             }
@@ -64,22 +64,9 @@ namespace Mobs
 
         private int CompareXZWithTargetForAttack() // return 1 for right attack, -1 for left attack and 0 for non-attack (or for special attack under him self) 
         {
-            var result = _targetTransform.position.x - _monsterTransform.position.x;
-            
-            if (result > -100 && result < 100) //check for out facing
+            if (_targetTransform.position.x - _monsterTransform.position.x > -1 && _targetTransform.position.x - _monsterTransform.position.x < 1) //check for attack
             {
-                if (result > 0)
-                {
-                    _isNeedTofacingRight = false;
-                } else
-                {
-                    _isNeedTofacingRight = true;
-                }
-            }
-
-            if (result > -10 && result < 10) //check for attack
-            {
-                if (result > 0)
+                if (_targetTransform.position.x - _monsterTransform.position.x > 0)
                 {
                     return 1;
                 }
@@ -91,26 +78,15 @@ namespace Mobs
             return 0;
         }
 
-        private void Flipper() //flip monster in a righgt way
-        {
-            if (_isNeedTofacingRight && _monsterTransform.localScale.x > 0)
-            {
-                _monsterTransform.localScale = new Vector2(_monsterTransform.localScale.x * -1, _monsterTransform.localScale.y);
-            } else if (!_isNeedTofacingRight && _monsterTransform.localScale.x < 0)
-            {
-                _monsterTransform.localScale = new Vector2(_monsterTransform.localScale.x * -1, _monsterTransform.localScale.y);
-            }
-        }
-
         private void CompareWithTimer () //do we see player and do we need to switch on idle state? 
         {
             _timerForCompare += Time.deltaTime;
 
             if (_timerForCompare >= _delayForCompare) 
             {
-                if (!CompareXZWithTarget()) //need to switch to idle ?
+                if (CompareXZWithTarget()) //need to switch to idle ?
                 {
-                    _stateMachine.ChangeState(new IdleState(_stateMachine));
+                    _stateMachine.ChangeState(new IdleState(_stateMachine, _monsterGameOnject));
                 }
                 _timerForCompare = 0;
             }
@@ -130,13 +106,16 @@ namespace Mobs
         
         private void MoveToTarget()
         {
-            var result = _targetTransform.position.x - _monsterTransform.position.x;
-            if (result > 0)
+            if (_targetTransform.position.x - _monsterTransform.position.x > 0)
             {
-                //go to the right
-            } else if (result < 0)
+                _rb2d.WakeUp();
+                _rb2d.velocity = new Vector2(_moveSpeed, _rb2d.velocity.y); 
+                Debug.Log("Бегу! Бегу сука за тобой, сейчас я тебя буду резать, мой мс " + _moveSpeed + " магнитуда " + _rb2d.velocity.magnitude);
+            } else
             {
-                //go to the left
+                _rb2d.WakeUp();
+                _rb2d.velocity = new Vector2(_moveSpeed * -1, _rb2d.velocity.y);
+               Debug.Log("Бегу! Бегу сука за тобой, сейчас я тебя буду резать, мой мс " + _moveSpeed * -1 + " магнитуда " + _rb2d.velocity.magnitude);
             }
         }
 
