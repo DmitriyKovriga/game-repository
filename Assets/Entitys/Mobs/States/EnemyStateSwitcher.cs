@@ -7,7 +7,7 @@ namespace Mobs
 {
     public class EnemyStateSwitcher : MonoBehaviour
     {
-        private StateController _SC;
+        protected StateController _StateController;
         [SerializeField] 
         protected AggroRangeSender _aggro;
         protected float _moveSpeed = 10f;
@@ -16,8 +16,6 @@ namespace Mobs
         protected Animator _anim;
         protected Transform _target;
         protected bool Flip = true;
-
-        protected StateController _StateController;
 
         [SerializeField]
         public UnityEvent _lastPlayerPos;
@@ -37,30 +35,30 @@ namespace Mobs
 
             _target = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
 
-            _SC = new StateController();
-            _SC.Initialize(new IdleState(_StateController, _rb2d, _moveSpeed, _transform, _anim, _target));
+            _StateController = new StateController();
+            _StateController.Initialize(new IdleState(_StateController, _rb2d, _moveSpeed, _transform, _anim, _target));
         }
 
         void Update()
         {
-            _SC._currentState.Update();
+            _StateController._currentState.Update();
             Debug.Log(_moveSpeed + " EnemyStateSwitcher");
         }
 
        public void FlipEnemyFacing()
         {
-            _SC._currentState.Fix();
+            _StateController._currentState.Fix();
             _transform.localScale = new Vector2(_transform.localScale.x * -1, _transform.localScale.y);
         }
 
         public void setSearchingState()
         {
-            _SC.NextState(new SearchingState(_StateController, _rb2d, _moveSpeed, _transform, _anim, _target));
+            _StateController.NextState(new SearchingState(_StateController, _rb2d, _moveSpeed, _transform, _anim, _target));
         }
 
         public void setIdleState()
         {
-            _SC.NextState(new IdleState(_StateController, _rb2d, _moveSpeed, _transform, _anim, _target));
+            _StateController.NextState(new IdleState(_StateController, _rb2d, _moveSpeed, _transform, _anim, _target));
         }
 
     }

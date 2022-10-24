@@ -7,8 +7,8 @@ namespace Mobs
 {
     public class SearchingState : States
     {
-
         private float _timer;
+
         public SearchingState(StateController StateController, Rigidbody2D rb2d, float moveSpeed, Transform transform, Animator anim, Transform target)
         {
             _StateController = StateController;
@@ -53,6 +53,15 @@ namespace Mobs
         private void MoveToTarget()
         {
             _rb2d.velocity = new Vector2(_moveSpeed, _rb2d.velocity.y);
+            var testPos = new Vector2 (_transform.position.x, _transform.position.y);
+
+            _timer += Time.deltaTime;
+            if (_timer > 2 && (testPos.Equals(_transform)))
+            {
+                _rb2d.velocity = new Vector2(_rb2d.velocity.x, 4);
+                //_anim.Play("Jump");
+                _timer = 0;
+            }
             
             //if (_target.transform.position.x > _transform.position.x)
             //{
@@ -82,6 +91,7 @@ namespace Mobs
                     {
                         FlipEnemyFacing();
                     }
+                    _moveSpeed /= 1.5f;
                     MoveToTarget();
                 }
             }
@@ -93,6 +103,7 @@ namespace Mobs
                     {
                         FlipEnemyFacing();
                     }
+                    _moveSpeed /= 1.5f;
                     MoveToTarget();
                 }
             }
@@ -102,10 +113,11 @@ namespace Mobs
             if (_timer > 3f)
             {
                 _timer = 0f;
+                _moveSpeed *= 1.5f;
                 setIdleState();
             }
         }
-
     }
 }
 
+// прыжок и замедление моба

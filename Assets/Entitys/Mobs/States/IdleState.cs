@@ -49,7 +49,6 @@ namespace Mobs
         {
             Debug.Log(_moveSpeed + "IdleState");
             _timer += Time.deltaTime;
-            //Debug.Log(_timer);
 
             if (_timer < 5)
             {
@@ -88,12 +87,16 @@ namespace Mobs
         {
             if (_target.position.x - _transform.position.x > -10 && _target.position.x - _transform.position.x < 10)
             {
-                setSearchingState();
+                if (_target.position.y - _transform.position.y > -10 && _target.position.y - _transform.position.y < 10)
+                {
+                    ChangeToSearchingState();
+                }
             }
-            if (_target.position.x - _transform.position.x > -10 && _target.position.x - _transform.position.x < 10)
-            {
+        }
 
-            }
+        public void ChangeToSearchingState()
+        {
+            _StateController.NextState(new SearchingState(_StateController, _rb2d, _moveSpeed, _transform, _anim, _target));
         }
     }
 }
