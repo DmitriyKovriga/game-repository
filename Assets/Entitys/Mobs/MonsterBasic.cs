@@ -23,6 +23,12 @@ namespace Mobs
         {
             _stateMachine._currentState.FixedUpdate();
         }
+
+        public void CallEdgeCheck()
+        {
+            Debug.Log("CallEdgeCheck!");
+            _stateMachine._currentState.ToolTip();
+        }
     }
 }
 

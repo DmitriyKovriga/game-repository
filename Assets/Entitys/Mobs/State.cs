@@ -24,6 +24,11 @@ namespace Mobs
         {
 
         }
+
+        public virtual void ToolTip()
+        {
+
+        }
     }
 }
 

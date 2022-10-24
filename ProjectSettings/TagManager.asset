@@ -6,6 +6,8 @@ TagManager:
   tags:
   - DealDamage
   - Enemy
+  - EdgeCheck
+  - Ground
   layers:
   - Default
   - TransparentFX

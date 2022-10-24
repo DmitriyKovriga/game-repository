@@ -11,6 +11,7 @@ namespace Mobs
         private float _timerForCompare;
         private float _delayForCompare = 1;
         private Vector2 _testPos;
+        private Animator _monsterAnim;
 
         private float _timerForCompareAttack; 
         private float _delayForCompareAttack = 1; //mb link it to monster attack speed ?
@@ -39,6 +40,7 @@ namespace Mobs
             _monsterTransform = _monsterGameObject.GetComponent<Transform>();
             _rb2d = _monsterGameObject.GetComponent<Rigidbody2D>();
             _monsterSprite = _monsterGameObject.GetComponent<SpriteRenderer>();
+            _monsterAnim = _monsterGameObject.GetComponent<Animator>();
         }
 
         public override void Exit()
@@ -112,6 +114,7 @@ namespace Mobs
 
         private void MoveToTarget()
         {
+            _monsterAnim.Play("Walk");
             if (_targetTransform.position.x - _monsterTransform.position.x > 0)
             {
                 _rb2d.WakeUp();
@@ -127,9 +130,11 @@ namespace Mobs
 
             if (_testPos.x.Equals(_monsterTransform.position.x))
             {
+                _monsterAnim.Play("Idle");
                 _timer += Time.deltaTime;
                 if (_timer > 0.5f)
                 {
+                    _monsterAnim.Play("Walk");
                     _rb2d.velocity = new Vector2(_rb2d.velocity.x, 15);
                     _timer = 0;
                 }

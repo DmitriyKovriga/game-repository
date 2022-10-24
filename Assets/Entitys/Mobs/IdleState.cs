@@ -18,6 +18,7 @@ namespace Mobs
         private StateMachine _stateMachine;
         private GameObject _monsterGameObject;
         private SpriteRenderer _monsterSprite;
+        private Animator _monsterAnim;
 
         //-----------------Logic for patrule------------
         private float _patruleTimer;
@@ -35,6 +36,7 @@ namespace Mobs
             _monsterTransform = _monsterGameObject.GetComponent<Transform>();
             _rb2d = _monsterGameObject.GetComponent<Rigidbody2D>();
             _monsterSprite = _monsterGameObject.GetComponent<SpriteRenderer>();
+            _monsterAnim = _monsterGameObject.GetComponent<Animator>();
         }
 
         public override void Exit()
@@ -50,12 +52,18 @@ namespace Mobs
             CompareWithTimer();
         }
 
+        public override void ToolTip()
+        {
+            _monsterSprite.flipX = !_monsterSprite.flipX;
+        }
+
         private void Patrule ()
         {
             _patruleTimer += Time.deltaTime;
 
             if (_patruleTimer <= 3f)
             {
+                _monsterAnim.Play("Walk");
                 if (_monsterSprite.flipX == true)
                 {
                     _rb2d.velocity = new Vector2(_moveSpeed * -1, _rb2d.velocity.y);
@@ -65,6 +73,7 @@ namespace Mobs
             }
             else if (_patruleTimer > 3f && _patruleTimer <= 6f)
             {
+                _monsterAnim.Play("Idle");
                 _rb2d.velocity = new Vector2(0, _rb2d.velocity.y);
             } else
             {
@@ -94,11 +103,6 @@ namespace Mobs
                 }
                 _timerForCompare = 0;
             }
-        }
-
-        private void EdgeCheck()
-        {
-            
         }
 
     }
