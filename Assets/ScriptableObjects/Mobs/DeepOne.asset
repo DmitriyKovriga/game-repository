@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 0}
+  m_Name: DeepOne
+  m_EditorClassIdentifier: "Assembly-CSharp:mobs:Monster\u0421haracteristics"
+  _maxHp: 0
+  _maxHpModificator: 0
+  _attackDamage: 0
+  _attackDamageModificator: 0
+  _moveSpeed: 0
+  _moveSpeedModificator: 0
+  _dropBlood: 0
+  _dropBloodModificator: 0
+  _dropMoney: 0
+  _dropMoneyModiificator: 0
+  _stunTime: 0
+  _stunResistance: 0
+  _pushbackDistance: 0
+  _pushbackResistance: 0
