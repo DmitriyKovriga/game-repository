@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a0001fb2078d67d43b79b3adc09be1ba, type: 3}
+  m_Name: HeroHealthCharacteristicData
+  m_EditorClassIdentifier: 
+  _maxHpBase: 100
+  _maxHpModificator: 1
+  _resultMaxHp: 100
+  _moveSpeedBase: 5
+  _moveSpeedModificator: 1
+  _resultMoveSpeed: 5
+  _jumpHeight: 7
+  _luck: 10
+  _sanity: 10
+  _stunTime: 2
+  _stunResistance: 1
+  _resultStunTime: 2
