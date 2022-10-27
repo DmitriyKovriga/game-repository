@@ -9,20 +9,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
+  m_Script: {fileID: 11500000, guid: 8b90acc7177d84f42b1a302952964c77, type: 3}
   m_Name: DeepOne
-  m_EditorClassIdentifier: "Assembly-CSharp:mobs:Monster\u0421haracteristics"
-  _maxHp: 0
-  _maxHpModificator: 0
-  _attackDamage: 0
-  _attackDamageModificator: 0
-  _moveSpeed: 0
-  _moveSpeedModificator: 0
-  _dropBlood: 0
-  _dropBloodModificator: 0
-  _dropMoney: 0
-  _dropMoneyModiificator: 0
-  _stunTime: 0
-  _stunResistance: 0
-  _pushbackDistance: 0
-  _pushbackResistance: 0
+  m_EditorClassIdentifier: 
+  _maxHp: 250
+  _maxHpModificator: 1
+  _attackDamage: -25
+  _attackDamageModificator: 1
+  _moveSpeed: 5
+  _moveSpeedModificator: 1
+  _dropBlood: 10
+  _dropBloodModificator: 1
+  _dropMoney: 10
+  _dropMoneyModiificator: 1
+  _stunTime: 2
+  _stunResistance: 1
+  _pushbackDistance: 2
+  _pushbackResistance: 1

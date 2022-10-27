@@ -2,8 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace mobs 
-{
+
     [CreateAssetMenu(fileName = "New Monster Data", menuName = "New Monster Data", order = 51)]
     public class Monster—haracteristics : ScriptableObject
     {
@@ -163,5 +162,5 @@ namespace mobs
             return _pushbackResistance;
         }
     }
-}
+
 
