@@ -8,13 +8,13 @@ namespace hero
     public class MovementController : MonoBehaviour
 {
         [SerializeField] private HealthHeroCharacteristics _heroC;
-    private Hero _hero;
     private Rigidbody2D _rigidbody2D;
     private float _moveSpeed;
     [SerializeField] private float _horizontalInput;
     private float _verticalInput;
 
     private HeroAnimator _heroAnimator;
+        private GroundCheck _groundCheck;
 
     //------rope-------
     private RopeMode _ropeMode;
@@ -25,10 +25,11 @@ namespace hero
     {
         _moveSpeed = _heroC.GetResultMoveSpeed(); //получаем movespeed из нашего Hero
         _rigidbody2D = gameObject.GetComponent<Rigidbody2D>(); //получаем риджитЅади
-        _hero = gameObject.GetComponent<Hero>(); //получаем граунд чекер
         _heroAnimator = gameObject.GetComponent<HeroAnimator>();
         _ropeMode = gameObject.GetComponent<RopeMode>();
         _isClimbing = _ropeMode.getClimbing();
+            _groundCheck = gameObject.GetComponent<GroundCheck>();
+        
 
     }
 
@@ -64,7 +65,7 @@ namespace hero
 
     public void jump (InputAction.CallbackContext context)
     {
-        if (context.performed && _hero.getGround())
+        if (context.performed && _groundCheck.isGrounded())
         {
             _rigidbody2D.velocity = new Vector2(_rigidbody2D.velocity.x, _heroC.GetJumpHeight()); //задаем велосити по y в jumpHeight из Hero
         }

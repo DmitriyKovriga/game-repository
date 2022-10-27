@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace mobs 
 {
-    [CreateAssetMenu(fileName = "New Monster Data", menuName = "Monster Characteristic Scriptable Object", order = 51)]
+    [CreateAssetMenu(fileName = "New Monster Data", menuName = "New Monster Data", order = 51)]
     public class Monster—haracteristics : ScriptableObject
     {
         [SerializeField] private float _maxHp;
@@ -22,7 +22,16 @@ namespace mobs
         [SerializeField] private float _pushbackDistance;
         [SerializeField] private float _pushbackResistance;
 
-       
+
+        public float getMaxHp()
+        {
+            return _maxHp;
+        }
+
+        public void setMaxHp(float newValue)
+        {
+            _maxHp += newValue;
+        }
 
         public void setMaxHpModificator(float newValue)
         {

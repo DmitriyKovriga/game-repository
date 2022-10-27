@@ -9,10 +9,10 @@ namespace hero
     {
         [SerializeField] private Transform _ropeTrigger; //объект для поиска веревок
         [SerializeField] private LayerMask _ropeLayer; //указываем слой веревки
+        [SerializeField] private HealthHeroCharacteristics _heroC;
 
         private Rigidbody2D _rb2d;
         private Transform _t1;
-        private Hero _hero; //класс с переменной скорости карабканья
         private GroundCheck _groundCheck;
 
         private Vector2 positionOfRoupe; //переменная для хранения позиции веревки из коллизии
@@ -26,7 +26,6 @@ namespace hero
         private void Awake() //инициализация
         {
             _rb2d = gameObject.GetComponent<Rigidbody2D>();
-            _hero = gameObject.GetComponent<Hero>();
             _t1 = gameObject.GetComponent<Transform>();
             _groundCheck = gameObject.GetComponent<GroundCheck>();
             _fireCheck = gameObject.GetComponent<FireScript>();
@@ -46,7 +45,7 @@ namespace hero
             if (!_isOnRope)
             {
                 _climbing = false;
-                _hero.setClimbing(false); _rb2d.gravityScale = 4;
+                _rb2d.gravityScale = 4;
                 _rb2d.constraints = RigidbodyConstraints2D.FreezeRotation;
             }
             if (_climbing) climb(); //двигаемся пока вверх и вниз
@@ -54,7 +53,7 @@ namespace hero
 
         private void climb()
         {
-            if (_climbing) _rb2d.velocity = new Vector2(0, _hero.getClimbingSpeed() * _VerticalInput);
+            if (_climbing) _rb2d.velocity = new Vector2(0, _heroC.GetResultMoveSpeed() * _VerticalInput);
 
         }
 
@@ -70,7 +69,7 @@ namespace hero
         private void RopeModOn()
         {
             _climbing = true;
-            _hero.setClimbing(true); _rb2d.gravityScale = 0;
+            _rb2d.gravityScale = 0;
             _t1.position = new Vector2(positionOfRoupe.x, _t1.position.y);
             Debug.Log("Позиция игрока: " + _rb2d.position.x + " Позиция веревки: " + positionOfRoupe.x);
             _rb2d.constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezeRotation; //фризим по х
@@ -89,7 +88,7 @@ namespace hero
             if (_climbing && context.started)
             {
                 RopeModOff();
-                _rb2d.velocity = new Vector2(_rb2d.velocity.x, _hero.getJumpHeight());
+                _rb2d.velocity = new Vector2(_rb2d.velocity.x, _heroC.GetJumpHeight());
             }
         }
 

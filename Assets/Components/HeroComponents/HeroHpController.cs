@@ -35,6 +35,13 @@ namespace hero
             DeathCheck();
         }
 
+        private void FixedUpdate()
+        {
+            if (_objectHp > _objectMaxHp)
+            {
+                _objectHp = _objectMaxHp;
+            }
+        }
 
 
         private void OnTriggerEnter2D(Collider2D collision)

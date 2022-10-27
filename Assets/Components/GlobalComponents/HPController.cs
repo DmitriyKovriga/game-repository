@@ -1,12 +1,14 @@
+using hero;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace hero
+namespace mobs
 {
     public class HPController : MonoBehaviour
     {
         [SerializeField] private float _objectHp;
+        [SerializeField] private float _objectMaxHp;
 
 
         public float getHp()
@@ -14,7 +16,7 @@ namespace hero
             return _objectHp;
         }
 
-        public void setHp(float number)
+        public void modifyHp(float number)
         {
             if (number < 0 && number != 0)
             {
@@ -26,7 +28,19 @@ namespace hero
             }
         }
 
+        public void setHp(float newValue)
+        {
+            _objectHp = newValue;
+            _objectMaxHp = newValue;
+        }
 
+        private void FixedUpdate()
+        {
+            if (_objectHp > _objectMaxHp)
+            {
+                _objectHp = _objectMaxHp;
+            }
+        }
 
         private void OnTriggerEnter2D(Collider2D collision)
         {

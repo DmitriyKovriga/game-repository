@@ -15,10 +15,10 @@ MonoBehaviour:
   _maxHpBase: 100
   _maxHpModificator: 1
   _resultMaxHp: 100
-  _moveSpeedBase: 5
+  _moveSpeedBase: 7
   _moveSpeedModificator: 1
   _resultMoveSpeed: 5
-  _jumpHeight: 7
+  _jumpHeight: 14
   _luck: 10
   _sanity: 10
   _stunTime: 2

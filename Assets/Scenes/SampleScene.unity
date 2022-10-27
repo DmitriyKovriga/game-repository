@@ -16691,6 +16691,7 @@ GameObject:
   - component: {fileID: 886546177}
   - component: {fileID: 886546178}
   - component: {fileID: 886546179}
+  - component: {fileID: 886546180}
   m_Layer: 9
   m_Name: Enemy
   m_TagString: Enemy
@@ -16806,7 +16807,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c53f642c269be741813604f92f8af84, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _objectHp: 10000
+  _objectHp: 1
+  _objectMaxHp: 0
 --- !u!50 &886546176
 Rigidbody2D:
   serializedVersion: 4
@@ -16873,6 +16875,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a0f9781adb54fe409912ffba0a07886, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &886546180
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 886546171}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 588960d47451694449403cd7ee5e23dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _monsterC: {fileID: 0}
 --- !u!1 &1009942839
 GameObject:
   m_ObjectHideFlags: 0
@@ -17752,7 +17767,6 @@ GameObject:
   - component: {fileID: 1805945971}
   - component: {fileID: 1805945970}
   - component: {fileID: 1805945969}
-  - component: {fileID: 1805945976}
   - component: {fileID: 1805945975}
   - component: {fileID: 1805945974}
   - component: {fileID: 1805945973}
@@ -18003,32 +18017,6 @@ CapsuleCollider2D:
   m_Offset: {x: 0.04, y: -0.19}
   m_Size: {x: 0.73, y: 1.13}
   m_Direction: 0
---- !u!114 &1805945976
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1805945968}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ad8d5433a7663f54cae4ef64b09ff5a6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _isGround: 0
-  _isClimbing: 0
-  _jumpHeight: 12
-  _moveSpeed: 7
-  _climbingSpeed: 5
-  _basicFlatDamage: -10
-  _basicModificatorForFlatDamage: 0
-  _resultFlatDamage: 0
-  _persentDamageModify: 2
-  _persentDamageModificator: 1
-  _resultDamageModificator: 0
-  _basicAttackSpeed: 0.4
-  _attackSpeedModificator: 1
-  _resultAttackSpeed: 0
 --- !u!114 &1805945977
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18057,7 +18045,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5122bd6896b19e549abf3d51c32d5b2d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _heroC: {fileID: 0}
+  _heroC: {fileID: 11400000, guid: a3ae508a6d8f32e4894824c88ab22fda, type: 2}
   _horizontalInput: 0
 --- !u!114 &1805945979
 MonoBehaviour:
@@ -18087,6 +18075,7 @@ MonoBehaviour:
   _ropeLayer:
     serializedVersion: 2
     m_Bits: 256
+  _heroC: {fileID: 11400000, guid: a3ae508a6d8f32e4894824c88ab22fda, type: 2}
   _isOnRope: 0
   _climbing: 0
 --- !u!114 &1805945982

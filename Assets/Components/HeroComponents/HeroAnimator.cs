@@ -7,7 +7,7 @@ namespace hero
         private string _currentState;
 
         private Rigidbody2D _r2D;
-        private Hero _hero;
+        private GroundCheck _groundChecker;
         private RopeMode _rope;
         private FireScript _fireScript;
         private bool _isFire;
@@ -16,7 +16,7 @@ namespace hero
         {
             _animator = gameObject.GetComponent<Animator>();
             _r2D = gameObject.GetComponent<Rigidbody2D>();
-            _hero = gameObject.GetComponent<Hero>();
+            _groundChecker = gameObject.GetComponent<GroundCheck>();
             _rope = gameObject.GetComponent<RopeMode>();
             _fireScript = gameObject.GetComponent<FireScript>();
         }
@@ -45,7 +45,7 @@ namespace hero
 
         public void AutoCheckState()
         {
-            if (_hero.getGround() && !_rope.getClimbing() && !_isFire)
+            if (_groundChecker.isGrounded() && !_rope.getClimbing() && !_isFire)
             {
                 if (_r2D.velocity.x == 0)
                 {
