@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class MovementController : MonoBehaviour
+namespace hero
+{
+    public class MovementController : MonoBehaviour
 {
 
     private Hero _hero;
@@ -72,4 +74,6 @@ public class MovementController : MonoBehaviour
             _rigidbody2D.velocity = new Vector2(_rigidbody2D.velocity.x, _rigidbody2D.velocity.y * 0.5f); //уменьшаем велосити если отжали кнопку и падаем
         }
     }
+}
+
 }

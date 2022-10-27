@@ -1,18 +1,39 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class DamageDealComponent : MonoBehaviour
+namespace hero
 {
-    [SerializeField] private float _damage;
-
-    public void setNewDamage(float _newDamage)
+    public class DamageDealComponent : MonoBehaviour
     {
-        _damage = _newDamage;
-    }
+        [SerializeField] private float _damage;
+        [SerializeField] private AttackHero—haracteristics _attackC;
+        [SerializeField] private AttackBulletModificators _attackB;
 
-    public float getDamage ()
-    {
-        return _damage;
+        private void Start()
+        {
+            CritChanseRoll();
+        }
+
+        public void setNewDamage(float _newDamage)
+        {
+            _damage = _newDamage;
+        }
+
+        public float getDamage()
+        {
+            return _damage;
+        }
+
+        private void CritChanseRoll()
+        {
+            var check = Random.Range(0, 100);
+
+            if (check <= _attackC._getResultCriticalChanse())
+            {
+                _damage *= _attackC._getResultCriticalMultiplayer();
+                Debug.Log("¬€œ¿À  –»“ - ƒ∆≈ œŒ“!");
+            }
+        }
     }
 }
+

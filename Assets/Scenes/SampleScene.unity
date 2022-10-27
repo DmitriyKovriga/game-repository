@@ -16806,7 +16806,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c53f642c269be741813604f92f8af84, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _objectHp: 100
+  _objectHp: 10000
 --- !u!50 &886546176
 Rigidbody2D:
   serializedVersion: 4
@@ -18206,8 +18206,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  _attackCharacteristics: {fileID: 11400000, guid: f8422e5f00a4c9143b2732dc7031491d, type: 2}
   _bullet: {fileID: 4645117174209105198, guid: febd349b5a830ef42aa671b5ccd522f4, type: 3}
-  _cooldownBetweenAttacks: 0.5
 --- !u!1 &1931797433
 GameObject:
   m_ObjectHideFlags: 0

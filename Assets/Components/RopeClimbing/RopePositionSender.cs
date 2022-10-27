@@ -1,24 +1,27 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class RopePositionSender : MonoBehaviour
+namespace hero
 {
-
-    private Transform _transform;
-    [SerializeField] private LayerMask _layerTarget;
-
-    private void Awake()
+    public class RopePositionSender : MonoBehaviour
     {
-        _transform = gameObject.GetComponent<Transform>();
-    }
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        //Debug.Log(collision.name + " " + collision.gameObject.layer);
-        
-        if (collision.gameObject.layer == 6)
+
+        private Transform _transform;
+        [SerializeField] private LayerMask _layerTarget;
+
+        private void Awake()
         {
-            collision.GetComponent<RopeMode>().setPosOfRoupe(_transform.position);
+            _transform = gameObject.GetComponent<Transform>();
         }
+        private void OnTriggerEnter2D(Collider2D collision)
+        {
+            //Debug.Log(collision.name + " " + collision.gameObject.layer);
+
+            if (collision.gameObject.layer == 6)
+            {
+                collision.GetComponent<RopeMode>().setPosOfRoupe(_transform.position);
+            }
         }
+    }
 }
+

@@ -12,13 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02b14becd07d5af4b980ad16f67ae824, type: 3}
   m_Name: HeroAttackCharacteristicData
   m_EditorClassIdentifier: 
-  _DamageBase: 25
+  _DamageBase: -25
   _DamageModificator: 1
-  _resultDamage: 25
+  _resultDamage: -25
   _attackSpeed: 0.4
-  _criticalChanseBase: 0.1
+  _criticalChanseBase: 10
   _criticalChanseModiificator: 1
-  _resultCriticalChanse: 0.1
+  _resultCriticalChanse: 10
   _criticalMultiplayerBase: 1.5
   _criticalMultiplayerModificator: 1
   _resultCriticalMultiplayer: 0

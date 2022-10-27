@@ -167,3 +167,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _damage: 0
+  _attackC: {fileID: 11400000, guid: f8422e5f00a4c9143b2732dc7031491d, type: 2}
+  _attackB: {fileID: 11400000, guid: 6c47339c4fd5b0b46926e1d5a3c13a3b, type: 2}

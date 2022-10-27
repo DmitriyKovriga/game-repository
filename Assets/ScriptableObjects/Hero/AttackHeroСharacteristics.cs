@@ -49,6 +49,11 @@ namespace hero
         //------------Attack speed---------------
 
         [SerializeField] float _attackSpeed; //Time between attacks ?
+        public float GetAttackSpeed ()
+        {
+            return _attackSpeed;
+        }
+
         public void ModifyAttackSpeed (float number)
         {
             if (number < 0 && number != 0)

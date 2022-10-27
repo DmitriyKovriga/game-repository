@@ -3,98 +3,111 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
-
-public class FireScript : MonoBehaviour
+namespace hero 
 {
-    
-    //------------------------------------------------��������� �������� � ����� � ��������------------------------------------------
-    [SerializeField] private Transform _fireRight;
-    [SerializeField] private Transform _fireLeft;
-    [SerializeField] private UnityEvent _fireLeftEvenet;
-    [SerializeField] private UnityEvent _fireRightEvenet;
-
-    
-    private bool _isFire = false; //��������� ��������
-    [SerializeField] private GameObject _bullet; //������ ����
-    private SpriteRenderer _sr; //����� ��� �������� �������
-    private HeroAnimator _hr; //����� ��� �������� ������� �� ���������
-    private Rigidbody2D _rb2d; //������
-    private Hero _hero; //����� ����� �� �����
-    private RopeMode _ropeMode; //��� ������� �������� �� �������
-
-    [SerializeField] private float _cooldownBetweenAttacks;
-    private float _timer;
-
-    private void Awake()
+    public class FireScript : MonoBehaviour
     {
-        _sr = gameObject.GetComponent<SpriteRenderer>();
-        _hr = gameObject.GetComponent<HeroAnimator>();
-        _rb2d = gameObject.GetComponent<Rigidbody2D>();
-        _hero = gameObject.GetComponent<Hero>();
-        _ropeMode = gameObject.GetComponent<RopeMode>();
-    }
 
-    public bool getFire()
-    {
-        return _isFire;
-    }
+        [SerializeField] private Transform _fireRight; //where is right
+        [SerializeField] private Transform _fireLeft; //where is left
+        [SerializeField] private UnityEvent _fireLeftEvenet; //play fire animation
+        [SerializeField] private UnityEvent _fireRightEvenet; //play fire animation
 
-    private void Start()
-    {
-        _cooldownBetweenAttacks = _hero.getResultAttackSpeed();
-    }
+        [SerializeField] private AttackHeroСharacteristics _attackCharacteristics; //have stats from this
+        [SerializeField] private GameObject _bullet; //prefab bullet
 
-    private void Update()
-    {
-        _timer += Time.deltaTime;
-        
+        //----------local logic var---------- 
+        private bool _isFire = false;
+        private float _timer;
+        private float _cooldownBetweenAttacks; //swap to attack speed and need to delete
+                                               //----------local logic var---------- 
 
-        if (_isFire)
+        //----------enother staff, need to clear------------------
+        private SpriteRenderer _sr;
+        private Rigidbody2D _rb2d;
+        private RopeMode _ropeMode;
+        private HeroAnimator _hr;
+        //----------enother staff, need to clear------------------
+
+        private void Awake()
         {
-           _rb2d.constraints = RigidbodyConstraints2D.FreezeRotation;
-        } else
-        {
-            if (!_ropeMode.getClimbing()) _rb2d.constraints = RigidbodyConstraints2D.FreezeRotation;
+            _sr = gameObject.GetComponent<SpriteRenderer>();
+            _hr = gameObject.GetComponent<HeroAnimator>();
+            _rb2d = gameObject.GetComponent<Rigidbody2D>();
+            _ropeMode = gameObject.GetComponent<RopeMode>();
         }
-       
-        if (_timer > _cooldownBetweenAttacks && _isFire)
-        {
-            _hr.FireAnimation();
-            Fire();
-            
-            
-        }
-    }
 
-    public void FireTrigger(InputAction.CallbackContext context)
-    {
-        if (context.started && !_hero.getClimbing())
+        public bool getFire()
         {
-            _isFire = true;
-        } else if (context.canceled)
+            return _isFire;
+        }
+
+        private void Start()
         {
-            _isFire = false;
+            _cooldownBetweenAttacks = _attackCharacteristics.GetAttackSpeed();
+        }
+
+        public void AttackSpeedFix () //this method we use when in enother script we change attack speed won't to put new value in to FireScript
+        {
+            _cooldownBetweenAttacks = _attackCharacteristics.GetAttackSpeed();
+        }
+
+        private void Update()
+        {
+            _timer += Time.deltaTime;
+
+
+            if (_isFire)
+            {
+                _rb2d.constraints = RigidbodyConstraints2D.FreezeRotation;
             }
-    }
+            else
+            {
+                if (!_ropeMode.getClimbing()) _rb2d.constraints = RigidbodyConstraints2D.FreezeRotation;
+            }
 
-    private void Fire()
-    {
-        
-        
-        if (_sr.flipX)
+            if (_timer > _cooldownBetweenAttacks && _isFire)
             {
-            Instantiate(_bullet, _fireLeft.position, _fireLeft.rotation).gameObject.GetComponent<DamageDealComponent>().setNewDamage(_hero.getResultHeroDamage()); 
-            _fireLeftEvenet.Invoke(); 
-            } else
-            {
-            Instantiate(_bullet, _fireRight.position, _fireRight.rotation).gameObject.GetComponent<DamageDealComponent>().setNewDamage(_hero.getResultHeroDamage()); 
-            _fireRightEvenet.Invoke(); 
+                _hr.FireAnimation();
+                Fire();
+
+
+            }
         }
-        _timer = 0;
 
-        // Play oneshot SFX
-        FMODUnity.RuntimeManager.PlayOneShot("event:/SFX/Shots DRY/Shots_1_DRY");
+        public void FireTrigger(InputAction.CallbackContext context)
+        {
+            if (context.started && !_ropeMode.getClimbing())
+            {
+                _isFire = true;
+            }
+            else if (context.canceled)
+            {
+                _isFire = false;
+            }
+        }
+
+        private void Fire()
+        {
+
+
+            if (_sr.flipX)
+            {
+                Instantiate(_bullet, _fireLeft.position, _fireLeft.rotation).gameObject.GetComponent<DamageDealComponent>().setNewDamage(_attackCharacteristics._getResultDamage());
+                _fireLeftEvenet.Invoke();
+            }
+            else
+            {
+                Instantiate(_bullet, _fireRight.position, _fireRight.rotation).gameObject.GetComponent<DamageDealComponent>().setNewDamage(_attackCharacteristics._getResultDamage());
+                _fireRightEvenet.Invoke();
+            }
+            _timer = 0;
+
+            // Play oneshot SFX
+            FMODUnity.RuntimeManager.PlayOneShot("event:/SFX/Shots DRY/Shots_1_DRY");
+
+        }
 
     }
-
 }
+
