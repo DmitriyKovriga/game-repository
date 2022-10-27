@@ -46,7 +46,6 @@ public class SpriteAnimator : MonoBehaviour
         {
             _onStart?.Invoke();
         }
-        Debug.Log("Анимация вспышки от выстрела " + gameObject.name);
         _renderer.sprite = _sprites[_currentSpritIndexe]; //назначаем новый кадр
         _nextFrameTime += _secondsPerFrame; //обновляем время для следующего апдейта кадра
         _currentSpritIndexe++; //переставляем индекс спрайта

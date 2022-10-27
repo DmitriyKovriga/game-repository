@@ -1,12 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
 namespace hero
 {
-    public class HPController : MonoBehaviour
+    public class HeroHpController : MonoBehaviour
     {
         [SerializeField] private float _objectHp;
+        private float _objectMaxHp;
+
+        [SerializeField] HealthHeroCharacteristics _heroC;
 
 
         public float getHp()
@@ -14,7 +16,13 @@ namespace hero
             return _objectHp;
         }
 
-        public void setHp(float number)
+        private void Start()
+        {
+            _objectMaxHp = _heroC.GetResultMaxHp();
+            _objectHp = _objectMaxHp;
+        }
+
+        public void ModifyHp(float number)
         {
             if (number < 0 && number != 0)
             {
@@ -24,6 +32,7 @@ namespace hero
             {
                 _objectHp += number;
             }
+            DeathCheck();
         }
 
 
@@ -32,8 +41,7 @@ namespace hero
         {
             if (collision.gameObject.CompareTag("DealDamage"))
             {
-                setHp(collision.gameObject.GetComponent<DamageDealComponent>().getDamage());
-                DeathCheck();
+                ModifyHp(collision.gameObject.GetComponent<DamageDealComponent>().getDamage());
             }
         }
 
@@ -46,4 +54,6 @@ namespace hero
         }
     }
 }
+
+
 

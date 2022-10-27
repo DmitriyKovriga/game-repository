@@ -30,8 +30,8 @@ namespace hero
 
             if (check <= _attackC._getResultCriticalChanse())
             {
-                _damage *= _attackC._getResultCriticalMultiplayer();
-                Debug.Log("ÂÛÏÀË ÊÐÈÒ - ÄÆÅÊÏÎÒ!");
+                _damage = _damage * _attackC._getResultCriticalMultiplayer();
+                Debug.Log("ÂÛÏÀË ÊÐÈÒ - íîâîå õï ïóëè: " + _damage);
             }
         }
     }

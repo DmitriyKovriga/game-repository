@@ -19,6 +19,6 @@ MonoBehaviour:
   _criticalChanseBase: 10
   _criticalChanseModiificator: 1
   _resultCriticalChanse: 10
-  _criticalMultiplayerBase: 1.5
+  _criticalMultiplayerBase: 2
   _criticalMultiplayerModificator: 1
-  _resultCriticalMultiplayer: 0
+  _resultCriticalMultiplayer: 2

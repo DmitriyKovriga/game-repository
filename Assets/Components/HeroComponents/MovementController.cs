@@ -7,7 +7,7 @@ namespace hero
 {
     public class MovementController : MonoBehaviour
 {
-
+        [SerializeField] private HealthHeroCharacteristics _heroC;
     private Hero _hero;
     private Rigidbody2D _rigidbody2D;
     private float _moveSpeed;
@@ -17,18 +17,18 @@ namespace hero
     private HeroAnimator _heroAnimator;
 
     //------rope-------
-    private RopeMode ropeMode;
+    private RopeMode _ropeMode;
     private bool _isClimbing;
 
     
     private void Awake()
     {
-        _moveSpeed = gameObject.GetComponent<Hero>().getMoveSpeed(); //получаем movespeed из нашего Hero
+        _moveSpeed = _heroC.GetResultMoveSpeed(); //получаем movespeed из нашего Hero
         _rigidbody2D = gameObject.GetComponent<Rigidbody2D>(); //получаем риджитБади
         _hero = gameObject.GetComponent<Hero>(); //получаем граунд чекер
         _heroAnimator = gameObject.GetComponent<HeroAnimator>();
-        ropeMode = gameObject.GetComponent<RopeMode>();
-        _isClimbing = ropeMode.getClimbing();
+        _ropeMode = gameObject.GetComponent<RopeMode>();
+        _isClimbing = _ropeMode.getClimbing();
 
     }
 
@@ -66,7 +66,7 @@ namespace hero
     {
         if (context.performed && _hero.getGround())
         {
-            _rigidbody2D.velocity = new Vector2(_rigidbody2D.velocity.x, _hero.getJumpHeight()); //задаем велосити по y в jumpHeight из Hero
+            _rigidbody2D.velocity = new Vector2(_rigidbody2D.velocity.x, _heroC.GetJumpHeight()); //задаем велосити по y в jumpHeight из Hero
         }
 
         if (context.canceled && _rigidbody2D.velocity.y > 0f)

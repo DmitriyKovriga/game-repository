@@ -32,7 +32,6 @@ public class BulletModificator : MonoBehaviour
         
         if (hitInfo.TryGetComponent(out Rigidbody2D r2d) && hitInfo.gameObject.layer != _playerLayer && hitInfo.gameObject.layer != _bulletLayer)
         {
-            Debug.Log("Пуля разбилась об: " + hitInfo);
             Destroy(gameObject);
         }
     }
