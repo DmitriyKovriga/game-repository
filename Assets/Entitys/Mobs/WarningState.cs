@@ -24,7 +24,7 @@ namespace Mobs
         private SpriteRenderer _monsterSprite;
 
         //-----------------Logic for chasing------------
-        private float _moveSpeed = 5f;
+        private float _moveSpeed = 2f;
         private float _timer = 5f;
 
         public WarningState (StateMachine stateMachine, GameObject monster)

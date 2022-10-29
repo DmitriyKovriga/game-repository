@@ -6,7 +6,6 @@ namespace Mobs
 {
     public class MonsterBasic : MonoBehaviour
     {
-        [SerializeField] private float _moveSpeed; //while here, then we put it to scriptable obj and put link of it to state
         private StateMachine _stateMachine;
         private void Start()
         {  

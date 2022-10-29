@@ -46,7 +46,7 @@ namespace mobs
         {
             if (collision.gameObject.CompareTag("DealDamage"))
             {
-                setHp(collision.gameObject.GetComponent<DamageDealComponent>().getDamage());
+                modifyHp(collision.gameObject.GetComponent<DamageDealComponent>().getDamage());
                 DeathCheck();
             }
         }

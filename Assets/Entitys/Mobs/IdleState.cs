@@ -22,7 +22,7 @@ namespace Mobs
 
         //-----------------Logic for patrule------------
         private float _patruleTimer;
-        private float _moveSpeed = 5;
+        private float _moveSpeed = 2;
 
         public IdleState(StateMachine stateMachine, GameObject monster)
         {

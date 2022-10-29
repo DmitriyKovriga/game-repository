@@ -31,12 +31,12 @@ public class ModificatorsToMonsterTrigger : ScriptableObject
 
     [SerializeField] private bool _explosionCheck;
 
-    public bool isNeedToExposion()
+    public bool isNeedToExplosion()
     {
         return _explosionCheck;
     }
 
-    public void setExposionCheck(bool newValue)
+    public void setExplosionCheck(bool newValue)
     {
         _explosionCheck = newValue;
     }

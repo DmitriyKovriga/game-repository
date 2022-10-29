@@ -138,7 +138,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _speed: 20
-  _rb2d: {fileID: 0}
   _enemyLayer:
     serializedVersion: 2
     m_Bits: 512
@@ -154,6 +153,7 @@ MonoBehaviour:
   _bulletLayer:
     serializedVersion: 2
     m_Bits: 128
+  _logicModificator: {fileID: 11400000, guid: 6c47339c4fd5b0b46926e1d5a3c13a3b, type: 2}
 --- !u!114 &4419887647612755733
 MonoBehaviour:
   m_ObjectHideFlags: 0

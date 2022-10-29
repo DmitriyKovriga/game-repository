@@ -16,7 +16,7 @@ MonoBehaviour:
   _maxHpModificator: 1
   _attackDamage: -25
   _attackDamageModificator: 1
-  _moveSpeed: 5
+  _moveSpeed: 2
   _moveSpeedModificator: 1
   _dropBlood: 10
   _dropBloodModificator: 1
