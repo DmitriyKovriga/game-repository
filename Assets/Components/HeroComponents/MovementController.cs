@@ -12,9 +12,12 @@ namespace hero
     private float _moveSpeed;
     [SerializeField] private float _horizontalInput;
     private float _verticalInput;
+        private LayerMask _interactionLayer;
+        private Collider2D[] _interactionResult = new Collider2D[1];
 
     private HeroAnimator _heroAnimator;
         private GroundCheck _groundCheck;
+        [SerializeField] LayerMask _itemLayer;
 
     //------rope-------
     private RopeMode _ropeMode;
@@ -75,6 +78,23 @@ namespace hero
             _rigidbody2D.velocity = new Vector2(_rigidbody2D.velocity.x, _rigidbody2D.velocity.y * 0.5f); //уменьшаем велосити если отжали кнопку и падаем
         }
     }
+
+        public void Interact(InputAction.CallbackContext context)
+        {
+            if (context.canceled)
+            {
+                var size = Physics2D.OverlapCircleNonAlloc(gameObject.transform.position, 0.5f, _interactionResult, _interactionLayer);
+
+                for (int i = 0; i < size; i++)
+                {
+                    var interactable = _interactionResult[i].GetComponent<ItemController>();
+                    if (interactable != null)
+                    {
+                        interactable.Interact();
+                    }
+                }
+            }
+        }
 }
 
 }

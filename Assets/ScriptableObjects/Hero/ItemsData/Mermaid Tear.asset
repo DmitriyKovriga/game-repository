@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 0}
+  m_Name: Mermaid Tear
+  m_EditorClassIdentifier: Assembly-CSharp:hero:IterableItemsData
+  _icon: {fileID: 21300000, guid: 82f09884bfc9d774e8ccfde0c57e7854, type: 3}
+  _title: Mermaid Tear
+  _description: "\u0414\u043E\u0431\u0430\u0432\u043B\u044F\u0435\u0442 \u0445\u043F"
+  _maxCount: 25
+  _count: 0
+  _effectIndex: 1
+  _effectsOfItemsLink: {fileID: 11400000, guid: 957a8ead0da9c8144a358fe04ca6f619, type: 2}

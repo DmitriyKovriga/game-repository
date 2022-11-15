@@ -39,15 +39,10 @@ namespace Mobs
 
                 if (_modificatorsData.isNeedToExplosion())
                 {
-                    //exposion realization
+                    //monsterBasic.Explosion();
                 }
-
             }
-
-            
         }
-
-
     }
 }
 

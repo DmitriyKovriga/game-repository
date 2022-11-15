@@ -2,45 +2,39 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HeroItemData : ScriptableObject
+
+namespace hero
 {
-    
-}
 
-//--------------------------------------------Iterable Item Abstact class------------------------------------
-public abstract class IterableItem
-{
-    private int _count = 0;
-    private int _maxCount;
-
-    public abstract void _AddToCount();
-
-    public abstract void ItemEffect();
-}
-
-public abstract class UnicItem
-{
-    public abstract void ItemEffect();
-}
-
-//-------------------------------------------Our Items-------------------------------------------------------
-
-public class MermaidTear : IterableItem
-{
-    private int _count = 0;
-    private int _maxCount;
-
-    public override void _AddToCount()
+    public abstract class BaseItemData : ScriptableObject
     {
-        if (_count < _maxCount) //if we have count < maxCount, we add 1 to count and run itemEffect
-        {
-            _count++;
-            ItemEffect();
-        }
+        public Sprite _icon;
+
+        public string _title;
+
+        public string _description;
     }
-
-    public override void ItemEffect()
+    [CreateAssetMenu(fileName = "New Iterable", menuName = "Create New Iterable Item", order = 51)]
+    public class IterableItemsData : BaseItemData
     {
-        // add +25 hp to our hero hp pool
+        public int _maxCount;
+        public int _count;
+        public int _effectIndex;
+        public EffectsOfItems _effectsOfItemsLink;
+
+        public void addToCount()
+        {
+            if (_count <= _maxCount)
+            {
+                _count++;
+                itemEffect();
+            }
+        }
+
+        private void itemEffect()
+        {
+            _effectsOfItemsLink.ActivateItemEffect(_effectIndex);
+        }
+        
     }
 }
