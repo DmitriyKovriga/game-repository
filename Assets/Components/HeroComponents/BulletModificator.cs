@@ -47,6 +47,25 @@ namespace hero
             
         }
 
+        private void OnTriggerExit2D(Collider2D hitInfo)
+        {
+            if (_logicModificator.isPierce())
+            {
+                if (hitInfo.gameObject.layer == 3) //idk why it not working with _groundLayer, but wuth number 3 is all fine
+                {
+                    Destroy(gameObject);
+                }
+            }
+            else
+            {
+                if (hitInfo.TryGetComponent(out Rigidbody2D r2d2) && hitInfo.gameObject.layer != _playerLayer && hitInfo.gameObject.layer != _bulletLayer)
+                {
+                    Destroy(gameObject);
+                }
+            }
+
+        }
+
     }
 }
 
