@@ -6,10 +6,39 @@ namespace hero
     [CreateAssetMenu(fileName = "Hero Health Characteristic Scriptable Object", menuName = "Hero Health Characteristic Scriptable Object", order = 51)]
     public class HealthHeroCharacteristics : ScriptableObject
     {
+        private void OnEnable()
+        {
+            var isReturn = GameObject.FindGameObjectWithTag("ReturnToDefault");
+            if (isReturn != null)
+            {
+                _maxHpBase = _maxHpBaseDefault;
+                _maxHpModificator = _maxHpModificatorDefault;
+                _resultMaxHp = _ResultmaxHpDefault;
+
+                _moveSpeedBase = _moveSpeedBaseDefault;
+                _moveSpeedModificator = _moveSpeedModificatorDefault;
+                _resultMoveSpeed = _resultMoveSpeedDefault;
+
+                _jumpHeight = _jumpHightDefault;
+
+                _luck = _luckDefault;
+                _sanity = _sanityDefault;
+
+                _stunTime = _stunTimeDefault;
+                _stunResistance = _stunResistanceDefault;
+                _resultStunTime = _resultStunTimeDefault;
+            }
+        }
+
+
+
         //-------------------HP------------------
         [SerializeField] float _maxHpBase;
         [SerializeField] float _maxHpModificator;
         [SerializeField] float _resultMaxHp;
+        private float _maxHpBaseDefault = 100;
+        private float _maxHpModificatorDefault = 1;
+        private float _ResultmaxHpDefault = 100;
 
         public void ComputeResultMaxHp ()
         {
@@ -23,14 +52,7 @@ namespace hero
 
         public void ModifyMaxHpBase (float number)
         {
-            if (number < 0 && number != 0)
-            {
-                _maxHpBase -= number;
-            }
-            else if (number > 0 && number != 0)
-            {
-                _maxHpBase += number;
-            }
+            _maxHpBase += number;
         }
 
         public void ModifyMaxHpModificator(float number)
@@ -50,6 +72,9 @@ namespace hero
         [SerializeField] float _moveSpeedBase;
         [SerializeField] float _moveSpeedModificator;
         [SerializeField] float _resultMoveSpeed;
+        float _moveSpeedBaseDefault = 7;
+        float _moveSpeedModificatorDefault = 1;
+        float _resultMoveSpeedDefault = 7;
 
         public void ComputeResultMoveSpeed()
         {
@@ -88,6 +113,7 @@ namespace hero
 
         //------------------JUMP------------------------
         [SerializeField] private float _jumpHeight;
+        private float _jumpHightDefault = 14;
 
         public void ModifyJumpHeight (float number)
         {
@@ -110,6 +136,7 @@ namespace hero
         //-----------------Luck------------------------
 
         [SerializeField] private float _luck;
+        private float _luckDefault = 10;
 
         public void ModifyLuck(float number)
         {
@@ -133,6 +160,7 @@ namespace hero
         //-----------------Sanity----------------------
 
         [SerializeField] private float _sanity;
+        private float _sanityDefault = 10;
         public void ModifySanity(float number)
         {
             if (number < 0 && number != 0)
@@ -156,6 +184,9 @@ namespace hero
         [SerializeField] float _stunTime;
         [SerializeField] float _stunResistance;
         [SerializeField] float _resultStunTime;
+        private float _stunTimeDefault = 2;
+        private float _stunResistanceDefault = 1;
+        private float _resultStunTimeDefault = 2;
         public void ComputeResultStunTime ()
         {
             _resultStunTime = _stunTime * _stunResistance;

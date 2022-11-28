@@ -8,6 +8,7 @@ TagManager:
   - Enemy
   - EdgeCheck
   - Ground
+  - ReturnToDefault
   layers:
   - Default
   - TransparentFX
@@ -20,7 +21,7 @@ TagManager:
   - Rope
   - Enemy
   - Platform
-  - Item
+  - Interactable
   - 
   - 
   - 

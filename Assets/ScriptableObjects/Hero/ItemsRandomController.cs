@@ -8,30 +8,34 @@ namespace hero
     [CreateAssetMenu(fileName = "New Item Random Controller", menuName = "Create New Item Random Controller", order = 51)]
     public class ItemsRandomController : ScriptableObject
     {
-        public ScriptableObject[] _CommonitemsData = new ScriptableObject[] { };
-        public ScriptableObject[] _RareitemsData = new ScriptableObject[] { };
-        public ScriptableObject[] _UnicitemsData = new ScriptableObject[] { };
+        public IterableItemsData[] _CommonitemsData;
+        public IterableItemsData[] _RareitemsData;
+        public IterableItemsData[] _UnicitemsData;
         Random _random;
-        private void Awake()
+        
+
+        public IterableItemsData GetRandomCommonItem()
         {
+            Debug.Log("Сгенерировали камонку");
             _random = new Random();
-            
+            int resultIndex = _random.Next(0, _CommonitemsData.Length -1);
+            return _CommonitemsData[resultIndex];
         }
 
-
-        public ScriptableObject GetRandomCommonItem()
+        public IterableItemsData GetRandomRareItem()
         {
-            return _CommonitemsData[_random.Next(0, _CommonitemsData.Length - 1)];
+            Debug.Log("Сгенерировали рарку");
+            _random = new Random();
+            int resultIndex = _random.Next(0, _RareitemsData.Length -1);
+            return _RareitemsData[resultIndex];
         }
 
-        public ScriptableObject GetRandomRareItem()
+        public IterableItemsData GetRandomUnicItem()
         {
-            return _RareitemsData[_random.Next(0, _RareitemsData.Length - 1)];
-        }
-
-        public ScriptableObject GetRandomUnicItem()
-        {
-            return _UnicitemsData[_random.Next(0, _UnicitemsData.Length - 1)];
+            Debug.Log("Сгенерировали уник");
+            _random = new Random();
+            int resultIndex = _random.Next(0, _UnicitemsData.Length -1);
+            return _UnicitemsData[resultIndex];
         }
     }
 }

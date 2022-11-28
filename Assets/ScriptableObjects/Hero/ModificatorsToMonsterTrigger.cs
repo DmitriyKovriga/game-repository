@@ -7,6 +7,18 @@ public class ModificatorsToMonsterTrigger : ScriptableObject
 {
     [SerializeField] private bool _stunCheck;
 
+    private void OnEnable()
+    {
+        var isReturn = GameObject.FindGameObjectWithTag("ReturnToDefault");
+        if (isReturn != null)
+        {
+            _stunCheck = false;
+            _slowdownCheck = false;
+            _explosionCheck = false;
+            _ResExposureCheck = false;
+        }
+    }
+
     public bool isNeedToStun()
     {
         return _stunCheck;

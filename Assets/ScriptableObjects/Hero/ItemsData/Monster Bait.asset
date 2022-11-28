@@ -10,13 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 84db4fcc573da6c4eb228bab4d1f5110, type: 3}
-  m_Name: Mermaid Tear
+  m_Name: Monster Bait
   m_EditorClassIdentifier: 
   _icon: {fileID: 21300000, guid: 82f09884bfc9d774e8ccfde0c57e7854, type: 3}
-  _title: Mermaid Tear
-  _description: "+25 \u043C\u0430\u043A\u0441 \u0445\u043F"
+  _title: Monster Bait
+  _description: "\u0423\u0432\u0435\u043B\u0438\u0447\u0438\u0432\u0430\u0435\u0442
+    \u043A\u043E\u043B-\u0432\u043E \u043C\u043E\u043D\u0441\u0442\u0440\u043E\u0432"
   _maxCount: 10
-  _count: 2
+  _count: 0
   _effectIndex: 1
   _effectsOfItemsLink: {fileID: 11400000, guid: 957a8ead0da9c8144a358fe04ca6f619, type: 2}
-  _rarity: "\u041E\u0431\u044B\u0447\u043D\u044B\u0439"
+  _rarity: "\u0423\u043D\u0438\u043A\u0430\u043B\u044C\u043D\u044B\u0439"

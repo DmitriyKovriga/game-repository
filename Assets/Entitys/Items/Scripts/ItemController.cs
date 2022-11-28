@@ -6,35 +6,61 @@ using UnityEngine.Events;
 
 public class ItemController : MonoBehaviour
 {
-    private bool _isPickUpAllowed;
-    [SerializeField] private UnityEvent _TryPickUP;
+    //---------pick up logic--------
+    [SerializeField] private HeroItemsRepo _heroItemsRepo;
 
-    public void AddToMassive()
+    //---------generate logic---------
+    [SerializeField] private ItemsRandomController _randomizer;
+    private IterableItemsData _itemType;
+
+    //---------items logic
+    private SpriteRenderer _sprite;
+    private Light _light;
+    
+
+    private void Awake()
     {
+        _sprite = gameObject.GetComponent<SpriteRenderer>();
+        _light = gameObject.GetComponent<Light>();
+        generateItemType();
+
         
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    public void AddToMassive()
     {
-        if (collision.gameObject.layer == 6)
+        _heroItemsRepo.addItemToDataBase(_itemType);
+        Destroy(gameObject);
+        Debug.Log("Отработал интеракт на ItemController");
+    }
+
+    public void tryToPickUp()
+    {
+        AddToMassive();
+    }
+
+    private void generateItemType ()
+    {
+        var _randomNumber = Random.Range(1, 100);
+        if (_randomNumber < 2)
         {
-            _isPickUpAllowed = true;
+            _itemType = _randomizer.GetRandomUnicItem();
+            _light.color = Color.red;
+            _sprite.sprite = _itemType.getSprite();
+        }
+        else if (_randomNumber > 2 && _randomNumber < 40)
+        {
+            _itemType = _randomizer.GetRandomRareItem();
+            _light.color = Color.blue;
+            _sprite.sprite = _itemType.getSprite();
+        }
+        else
+        {
+            _itemType = _randomizer.GetRandomCommonItem();
+            _light.color = Color.white;
+            _sprite.sprite = _itemType.getSprite();
         }
     }
 
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.gameObject.layer == 6)
-        {
-            _isPickUpAllowed = false;
-        }
-    }
-
-    public void Interact ()
-    {
-        if (_isPickUpAllowed)
-        {
-            _TryPickUP.Invoke();
-        }
-    }
+    
 }

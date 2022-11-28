@@ -6,95 +6,100 @@ using UnityEngine.InputSystem;
 namespace hero
 {
     public class MovementController : MonoBehaviour
-{
+    {
         [SerializeField] private HealthHeroCharacteristics _heroC;
-    private Rigidbody2D _rigidbody2D;
-    private float _moveSpeed;
-    [SerializeField] private float _horizontalInput;
-    private float _verticalInput;
-        private LayerMask _interactionLayer;
+        private Rigidbody2D _rigidbody2D;
+        private float _moveSpeed;
+        [SerializeField] private float _horizontalInput;
+        private float _verticalInput;
+        [SerializeField ]private LayerMask _interactionLayer;
         private Collider2D[] _interactionResult = new Collider2D[1];
 
-    private HeroAnimator _heroAnimator;
+        private HeroAnimator _heroAnimator;
         private GroundCheck _groundCheck;
-        [SerializeField] LayerMask _itemLayer;
 
-    //------rope-------
-    private RopeMode _ropeMode;
-    private bool _isClimbing;
+        //------rope-------
+        private RopeMode _ropeMode;
+        private bool _isClimbing;
 
-    
-    private void Awake()
-    {
-        _moveSpeed = _heroC.GetResultMoveSpeed(); //получаем movespeed из нашего Hero
-        _rigidbody2D = gameObject.GetComponent<Rigidbody2D>(); //получаем риджитЅади
-        _heroAnimator = gameObject.GetComponent<HeroAnimator>();
-        _ropeMode = gameObject.GetComponent<RopeMode>();
-        _isClimbing = _ropeMode.getClimbing();
+
+        private void Awake()
+        {
+            _moveSpeed = _heroC.GetResultMoveSpeed(); //получаем movespeed из нашего Hero
+            _rigidbody2D = gameObject.GetComponent<Rigidbody2D>(); //получаем риджитЅади
+            _heroAnimator = gameObject.GetComponent<HeroAnimator>();
+            _ropeMode = gameObject.GetComponent<RopeMode>();
+            _isClimbing = _ropeMode.getClimbing();
             _groundCheck = gameObject.GetComponent<GroundCheck>();
-        
-
-    }
 
 
-    private void FixedUpdate()
-    {
-        if (!_isClimbing) moveHero(); //вызываем функцию движени€ 
-    }
-
-    public void flipHero ()
-    {
-        if (_horizontalInput > 0)
-        {
-            gameObject.GetComponent<SpriteRenderer>().flipX = true;
-        } else if (_horizontalInput < 0)
-        {
-            gameObject.GetComponent<SpriteRenderer>().flipX = false;
-        }
-    }
-
-
-    public void setHorizonalInput (InputAction.CallbackContext context) //получаем инпут по х и у, передаетс€ он в виде двух значение вектора 2д
-    {
-        _horizontalInput = context.ReadValue<Vector2>().x;
-        flipHero();
-        _verticalInput = context.ReadValue<Vector2>().y;
-         }
-
-    public void moveHero () //двигаем персонажа
-    {
-        _rigidbody2D.velocity = new Vector2(_horizontalInput * _moveSpeed, _rigidbody2D.velocity.y);
-     }
-
-    public void jump (InputAction.CallbackContext context)
-    {
-        if (context.performed && _groundCheck.isGrounded())
-        {
-            _rigidbody2D.velocity = new Vector2(_rigidbody2D.velocity.x, _heroC.GetJumpHeight()); //задаем велосити по y в jumpHeight из Hero
         }
 
-        if (context.canceled && _rigidbody2D.velocity.y > 0f)
-        {
-            _rigidbody2D.velocity = new Vector2(_rigidbody2D.velocity.x, _rigidbody2D.velocity.y * 0.5f); //уменьшаем велосити если отжали кнопку и падаем
-        }
-    }
 
-        public void Interact(InputAction.CallbackContext context)
+        private void FixedUpdate()
+        {
+            if (!_isClimbing) moveHero(); //вызываем функцию движени€ 
+        }
+
+        public void flipHero()
+        {
+            if (_horizontalInput > 0)
+            {
+                gameObject.GetComponent<SpriteRenderer>().flipX = true;
+            }
+            else if (_horizontalInput < 0)
+            {
+                gameObject.GetComponent<SpriteRenderer>().flipX = false;
+            }
+        }
+
+
+        public void setHorizonalInput(InputAction.CallbackContext context) //получаем инпут по х и у, передаетс€ он в виде двух значение вектора 2д
+        {
+            _horizontalInput = context.ReadValue<Vector2>().x;
+            flipHero();
+            _verticalInput = context.ReadValue<Vector2>().y;
+        }
+
+        public void moveHero() //двигаем персонажа
+        {
+            _rigidbody2D.velocity = new Vector2(_horizontalInput * _moveSpeed, _rigidbody2D.velocity.y);
+        }
+
+        public void jump(InputAction.CallbackContext context)
+        {
+            if (context.performed && _groundCheck.isGrounded())
+            {
+                _rigidbody2D.velocity = new Vector2(_rigidbody2D.velocity.x, _heroC.GetJumpHeight()); //задаем велосити по y в jumpHeight из Hero
+            }
+
+            if (context.canceled && _rigidbody2D.velocity.y > 0f)
+            {
+                _rigidbody2D.velocity = new Vector2(_rigidbody2D.velocity.x, _rigidbody2D.velocity.y * 0.5f); //уменьшаем велосити если отжали кнопку и падаем
+            }
+        }
+
+        public void OnInteract(InputAction.CallbackContext context)
         {
             if (context.canceled)
             {
-                var size = Physics2D.OverlapCircleNonAlloc(gameObject.transform.position, 0.5f, _interactionResult, _interactionLayer);
+                var hit = Physics2D.OverlapCircleNonAlloc(   //данный метод возвращает нам размер массива (количествой найденных объектов с нужным слоем),
+                    transform.position, //позици€ отрисовки круга
+                    1, //радиус круга
+                    _interactionResult, //массив найденных коллайдеров2д
+                    _interactionLayer); //лейер по которому ищем
 
-                for (int i = 0; i < size; i++)
+                for (int i = 0; i < hit; i++)
                 {
-                    var interactable = _interactionResult[i].GetComponent<ItemController>();
-                    if (interactable != null)
+                    var interactable = _interactionResult[i].GetComponent<Interactable>();
+                        if (interactable != null)
                     {
-                        interactable.Interact();
+                        Debug.Log("¬ыполнилс€ скрипт который запускает интеракцию, она произошла с объектом " + interactable);
+                        interactable.interact();
                     }
                 }
             }
         }
+    }
 }
 
-}

@@ -11,6 +11,9 @@ namespace hero
         [SerializeField] float _DamageBase;
         [SerializeField] float _DamageModificator;
         [SerializeField] float _resultDamage;
+        private float _DamageBaseDefault = 25;
+        private float _DamageModificatorDefault = 1;
+        private float _DamageResultDefault = 25;
         public void ComputeDamage ()
         {
             _resultDamage = _DamageBase* _DamageModificator;
@@ -49,6 +52,7 @@ namespace hero
         //------------Attack speed---------------
 
         [SerializeField] float _attackSpeed; //Time between attacks ?
+        private float _attackSpeedDefault = 0.4f;
         public float GetAttackSpeed ()
         {
             return _attackSpeed;
@@ -71,6 +75,9 @@ namespace hero
         [SerializeField] private float _criticalChanseBase;
         [SerializeField] private float _criticalChanseModiificator;
         [SerializeField] private float _resultCriticalChanse;
+        private float _criticalChanseBaseDefault = 10;
+        private float _criticalChanseModificatorDefault = 1;
+        private float _ResultcriticalChanseDefault = 10;
 
         public void ComputeCriticalChanse()
         {
@@ -109,6 +116,9 @@ namespace hero
         [SerializeField] private float _criticalMultiplayerBase;
         [SerializeField] private float _criticalMultiplayerModificator;
         [SerializeField] private float _resultCriticalMultiplayer;
+        private float _criticalMultiplayerBaseDefault = 2;
+        private float _criticalMultiplayerModificatorDefault = 1;
+        private float _resultCriticalMultiplayerDefault = 2;
 
         public void ComputeCriticalMultiplayer()
         {
@@ -149,6 +159,23 @@ namespace hero
             return _resultDamage * _resultCriticalMultiplayer;
         }
 
+        private void OnEnable()
+        {
+            var isReturn = GameObject.FindGameObjectWithTag("ReturnToDefault");
+            if (isReturn != null)
+            {
+                _DamageBase = _DamageBaseDefault;
+                _DamageModificator = _DamageModificatorDefault;
+                _resultDamage = _DamageResultDefault;
+                _attackSpeed = _attackSpeedDefault;
+                _criticalChanseBase = _criticalChanseBaseDefault;
+                _criticalChanseModiificator = _criticalChanseModificatorDefault;
+                _resultCriticalChanse = _ResultcriticalChanseDefault;
+                _criticalMultiplayerBase = _criticalMultiplayerBaseDefault;
+                _criticalMultiplayerModificator = _criticalMultiplayerModificatorDefault;
+                _resultCriticalMultiplayer = _resultCriticalMultiplayerDefault;
+            }
+        }
     }
 }
 

@@ -6,10 +6,15 @@ namespace hero
     public class HeroHpController : MonoBehaviour
     {
         [SerializeField] private float _objectHp;
-        private float _objectMaxHp;
+        [SerializeField] private float _objectMaxHp;
 
         [SerializeField] HealthHeroCharacteristics _heroC;
+        [SerializeField] EffectsOfItems _itemEffects; //прикдываем ссылку для  того, что-бы эффекты активировались именно на нашего гг
 
+        public void updateMaxHp()
+        {
+            _objectMaxHp = _heroC.GetResultMaxHp();
+        }
 
         public float getHp()
         {
@@ -20,6 +25,7 @@ namespace hero
         {
             _objectMaxHp = _heroC.GetResultMaxHp();
             _objectHp = _objectMaxHp;
+            _itemEffects.setActivePlayer(gameObject, this);
         }
 
         public void ModifyHp(float number)

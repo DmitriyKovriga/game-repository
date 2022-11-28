@@ -10,17 +10,28 @@ namespace hero
         [SerializeField] HealthHeroCharacteristics _HpCh;
         [SerializeField] AttackBulletModificators _AttackCh;
         [SerializeField] ModificatorsToMonsterTrigger _ModificatorsCh;
+        [SerializeField] GameObject _player;
+        [SerializeField] HeroHpController _playerHpControl;
         public void ActivateItemEffect(int index)
         {
             switch(index)
             {
                 case 1: //mermaid sheeet
                     _HpCh.ModifyMaxHpBase(25);
+                    _HpCh.ComputeResultMaxHp();
+                    Debug.Log("Увеличил макс хп в СО, теперь оно равно - " + _HpCh.GetResultMaxHp());
+                    _playerHpControl.updateMaxHp();
                     break;
                 default:
                     Debug.Log("Bug With Item Effect");
                     break;
             }
+        }
+
+        public void setActivePlayer(GameObject player, HeroHpController playerHpControll)
+        {
+            _player = player;
+            _playerHpControl = playerHpControll;
         }
     }
 }

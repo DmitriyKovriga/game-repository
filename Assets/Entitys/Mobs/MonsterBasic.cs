@@ -25,7 +25,6 @@ namespace Mobs
 
         public void CallEdgeCheck()
         {
-            Debug.Log("CallEdgeCheck!");
             _stateMachine._currentState.ToolTip();
         }
     }

@@ -31,19 +31,16 @@ namespace hero
 
         private void OnTriggerEnter2D(Collider2D hitInfo )
         {
-            Debug.Log(hitInfo.gameObject.layer);
             if (_logicModificator.isPierce())
             {
                 if (hitInfo.gameObject.layer == 3) //idk why it not working with _groundLayer, but wuth number 3 is all fine
                 {
-                    Debug.Log("dtxtroy1");
                     Destroy(gameObject);
                 }
             } else
             {
                 if (hitInfo.TryGetComponent(out Rigidbody2D r2d2) && hitInfo.gameObject.layer != _playerLayer && hitInfo.gameObject.layer != _bulletLayer)
                 {
-                    Debug.Log("dtxtroy2");
                     Destroy(gameObject);
                 }
             }

@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 84db4fcc573da6c4eb228bab4d1f5110, type: 3}
-  m_Name: Mermaid Tear
+  m_Name: Claw
   m_EditorClassIdentifier: 
   _icon: {fileID: 21300000, guid: 82f09884bfc9d774e8ccfde0c57e7854, type: 3}
-  _title: Mermaid Tear
-  _description: "+25 \u043C\u0430\u043A\u0441 \u0445\u043F"
+  _title: Claw
+  _description: "\u0412\u0430\u043C\u043F\u0438\u0440\u0438\u0437\u043C +5%"
   _maxCount: 10
-  _count: 2
+  _count: 1
   _effectIndex: 1
   _effectsOfItemsLink: {fileID: 11400000, guid: 957a8ead0da9c8144a358fe04ca6f619, type: 2}
-  _rarity: "\u041E\u0431\u044B\u0447\u043D\u044B\u0439"
+  _rarity: "\u0420\u0435\u0434\u043A\u0438\u0439"

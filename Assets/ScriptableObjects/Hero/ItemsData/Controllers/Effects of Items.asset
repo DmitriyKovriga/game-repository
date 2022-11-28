@@ -16,3 +16,5 @@ MonoBehaviour:
   _HpCh: {fileID: 11400000, guid: a3ae508a6d8f32e4894824c88ab22fda, type: 2}
   _AttackCh: {fileID: 11400000, guid: 6c47339c4fd5b0b46926e1d5a3c13a3b, type: 2}
   _ModificatorsCh: {fileID: 11400000, guid: 745085a6ee117f04f9d4d5c429a0a29f, type: 2}
+  _player: {fileID: 0}
+  _playerHpControl: {fileID: 0}
