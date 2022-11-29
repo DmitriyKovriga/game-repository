@@ -21,6 +21,7 @@ namespace hero
                     _HpCh.ComputeResultMaxHp();
                     Debug.Log("Увеличил макс хп в СО, теперь оно равно - " + _HpCh.GetResultMaxHp());
                     _playerHpControl.updateMaxHp();
+                    _playerHpControl.ModifyHp(25);
                     break;
                 default:
                     Debug.Log("Bug With Item Effect");

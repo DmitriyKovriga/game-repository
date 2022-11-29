@@ -12,9 +12,11 @@ public class IterableItemsData : HeroItemData
     public EffectsOfItems _effectsOfItemsLink;
     public string _rarity;
 
+    
+
     public void addToCount()
     {
-        if (_count <= _maxCount)
+        if (_count < _maxCount)
         {
             _count++;
             itemEffect();

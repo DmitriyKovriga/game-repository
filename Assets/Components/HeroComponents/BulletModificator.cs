@@ -31,36 +31,42 @@ namespace hero
 
         private void OnTriggerEnter2D(Collider2D hitInfo )
         {
-            if (_logicModificator.isPierce())
+            if (hitInfo.gameObject.layer != 11)
             {
-                if (hitInfo.gameObject.layer == 3) //idk why it not working with _groundLayer, but wuth number 3 is all fine
+                if (_logicModificator.isPierce())
                 {
-                    Destroy(gameObject);
+                    if (hitInfo.gameObject.layer == 3) //idk why it not working with _groundLayer, but wuth number 3 is all fine
+                    {
+                        Destroy(gameObject);
+                    }
                 }
-            } else
-            {
-                if (hitInfo.TryGetComponent(out Rigidbody2D r2d2) && hitInfo.gameObject.layer != _playerLayer && hitInfo.gameObject.layer != _bulletLayer)
+                else
                 {
-                    Destroy(gameObject);
+                    if (hitInfo.TryGetComponent(out Rigidbody2D r2d2) && hitInfo.gameObject.layer != _playerLayer && hitInfo.gameObject.layer != _bulletLayer)
+                    {
+                        Destroy(gameObject);
+                    }
                 }
             }
-            
         }
 
         private void OnTriggerExit2D(Collider2D hitInfo)
         {
-            if (_logicModificator.isPierce())
+            if (hitInfo.gameObject.layer != 11)
             {
-                if (hitInfo.gameObject.layer == 3) //idk why it not working with _groundLayer, but wuth number 3 is all fine
+                if (_logicModificator.isPierce())
                 {
-                    Destroy(gameObject);
+                    if (hitInfo.gameObject.layer == 3) //idk why it not working with _groundLayer, but wuth number 3 is all fine
+                    {
+                        Destroy(gameObject);
+                    }
                 }
-            }
-            else
-            {
-                if (hitInfo.TryGetComponent(out Rigidbody2D r2d2) && hitInfo.gameObject.layer != _playerLayer && hitInfo.gameObject.layer != _bulletLayer)
+                else
                 {
-                    Destroy(gameObject);
+                    if (hitInfo.TryGetComponent(out Rigidbody2D r2d2) && hitInfo.gameObject.layer != _playerLayer && hitInfo.gameObject.layer != _bulletLayer)
+                    {
+                        Destroy(gameObject);
+                    }
                 }
             }
 

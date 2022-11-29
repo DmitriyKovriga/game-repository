@@ -30,14 +30,7 @@ namespace hero
 
         public void ModifyHp(float number)
         {
-            if (number < 0 && number != 0)
-            {
-                _objectHp += number;
-            }
-            else if (number < 0 && number != 0)
-            {
-                _objectHp += number;
-            }
+            _objectHp += number;
             DeathCheck();
         }
 
